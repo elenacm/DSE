@@ -1,0 +1,728 @@
+ARM GAS  C:\Users\robin\AppData\Local\Temp\ccIcgMXM.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.main,"ax",%progbits
+  20              		.align	2
+  21              		.global	main
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	main, %function
+  25              	main:
+  26              	.LFB63:
+  27              		.file 1 "main.c"
+   1:main.c        **** 
+   2:main.c        **** #include "project.h"
+   3:main.c        **** 
+   4:main.c        **** int main(void)
+   5:main.c        **** {
+  28              		.loc 1 5 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+   6:main.c        **** 
+   7:main.c        **** 
+   8:main.c        ****     uint8 count;
+   9:main.c        ****     LCD_Start();
+  36              		.loc 1 9 0
+  37 0002 FFF7FEFF 		bl	LCD_Start
+  38              	.LVL0:
+  39              	.L2:
+  10:main.c        **** 
+  11:main.c        ****     for(;;)
+  12:main.c        ****     {
+  13:main.c        ****         LCD_ClearDisplay();
+  40              		.loc 1 13 0 discriminator 1
+  41 0006 0120     		movs	r0, #1
+  42 0008 FFF7FEFF 		bl	LCD_WriteControl
+  43              	.LVL1:
+  14:main.c        ****         LCD_Position(0,0);
+ARM GAS  C:\Users\robin\AppData\Local\Temp\ccIcgMXM.s 			page 2
+
+
+  44              		.loc 1 14 0 discriminator 1
+  45 000c 0021     		movs	r1, #0
+  46 000e 0846     		mov	r0, r1
+  47 0010 FFF7FEFF 		bl	LCD_Position
+  48              	.LVL2:
+  15:main.c        ****         LCD_PrintString("Count: ");
+  49              		.loc 1 15 0 discriminator 1
+  50 0014 0548     		ldr	r0, .L4
+  51 0016 FFF7FEFF 		bl	LCD_PrintString
+  52              	.LVL3:
+  16:main.c        ****         count = Status_Reg_Read();
+  53              		.loc 1 16 0 discriminator 1
+  54 001a FFF7FEFF 		bl	Status_Reg_Read
+  55              	.LVL4:
+  17:main.c        ****         LCD_PrintDecUint16(count);
+  56              		.loc 1 17 0 discriminator 1
+  57 001e FFF7FEFF 		bl	LCD_PrintU32Number
+  58              	.LVL5:
+  18:main.c        ****         CyDelay(100);
+  59              		.loc 1 18 0 discriminator 1
+  60 0022 6420     		movs	r0, #100
+  61 0024 FFF7FEFF 		bl	CyDelay
+  62              	.LVL6:
+  63 0028 EDE7     		b	.L2
+  64              	.L5:
+  65 002a 00BF     		.align	2
+  66              	.L4:
+  67 002c 00000000 		.word	.LC0
+  68              		.cfi_endproc
+  69              	.LFE63:
+  70              		.size	main, .-main
+  71              		.section	.rodata.str1.4,"aMS",%progbits,1
+  72              		.align	2
+  73              	.LC0:
+  74 0000 436F756E 		.ascii	"Count: \000"
+  74      743A2000 
+  75              		.text
+  76              	.Letext0:
+  77              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+  78              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+  79              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+  80              		.file 5 "Generated_Source\\PSoC5/LCD.h"
+  81              		.file 6 "Generated_Source\\PSoC5/Status_Reg.h"
+  82              		.file 7 "Generated_Source\\PSoC5/CyLib.h"
+  83              		.file 8 "Generated_Source\\PSoC5/core_cm3.h"
+  84              		.section	.debug_info,"",%progbits
+  85              	.Ldebug_info0:
+  86 0000 AD010000 		.4byte	0x1ad
+  87 0004 0400     		.2byte	0x4
+  88 0006 00000000 		.4byte	.Ldebug_abbrev0
+  89 000a 04       		.byte	0x4
+  90 000b 01       		.uleb128 0x1
+  91 000c 8E000000 		.4byte	.LASF25
+  92 0010 0C       		.byte	0xc
+  93 0011 E4010000 		.4byte	.LASF26
+  94 0015 1B000000 		.4byte	.LASF27
+  95 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ARM GAS  C:\Users\robin\AppData\Local\Temp\ccIcgMXM.s 			page 3
+
+
+  96 001d 00000000 		.4byte	0
+  97 0021 00000000 		.4byte	.Ldebug_line0
+  98 0025 02       		.uleb128 0x2
+  99 0026 01       		.byte	0x1
+ 100 0027 06       		.byte	0x6
+ 101 0028 1B020000 		.4byte	.LASF0
+ 102 002c 02       		.uleb128 0x2
+ 103 002d 01       		.byte	0x1
+ 104 002e 08       		.byte	0x8
+ 105 002f 80000000 		.4byte	.LASF1
+ 106 0033 02       		.uleb128 0x2
+ 107 0034 02       		.byte	0x2
+ 108 0035 05       		.byte	0x5
+ 109 0036 F6010000 		.4byte	.LASF2
+ 110 003a 02       		.uleb128 0x2
+ 111 003b 02       		.byte	0x2
+ 112 003c 07       		.byte	0x7
+ 113 003d 2E010000 		.4byte	.LASF3
+ 114 0041 03       		.uleb128 0x3
+ 115 0042 11000000 		.4byte	.LASF9
+ 116 0046 02       		.byte	0x2
+ 117 0047 3F       		.byte	0x3f
+ 118 0048 4C000000 		.4byte	0x4c
+ 119 004c 02       		.uleb128 0x2
+ 120 004d 04       		.byte	0x4
+ 121 004e 05       		.byte	0x5
+ 122 004f 06020000 		.4byte	.LASF4
+ 123 0053 02       		.uleb128 0x2
+ 124 0054 04       		.byte	0x4
+ 125 0055 07       		.byte	0x7
+ 126 0056 1C010000 		.4byte	.LASF5
+ 127 005a 02       		.uleb128 0x2
+ 128 005b 08       		.byte	0x8
+ 129 005c 05       		.byte	0x5
+ 130 005d D6010000 		.4byte	.LASF6
+ 131 0061 02       		.uleb128 0x2
+ 132 0062 08       		.byte	0x8
+ 133 0063 07       		.byte	0x7
+ 134 0064 8E010000 		.4byte	.LASF7
+ 135 0068 04       		.uleb128 0x4
+ 136 0069 04       		.byte	0x4
+ 137 006a 05       		.byte	0x5
+ 138 006b 696E7400 		.ascii	"int\000"
+ 139 006f 02       		.uleb128 0x2
+ 140 0070 04       		.byte	0x4
+ 141 0071 07       		.byte	0x7
+ 142 0072 81010000 		.4byte	.LASF8
+ 143 0076 03       		.uleb128 0x3
+ 144 0077 C5010000 		.4byte	.LASF10
+ 145 007b 03       		.byte	0x3
+ 146 007c 2C       		.byte	0x2c
+ 147 007d 41000000 		.4byte	0x41
+ 148 0081 05       		.uleb128 0x5
+ 149 0082 00020000 		.4byte	.LASF11
+ 150 0086 04       		.byte	0x4
+ 151 0087 E401     		.2byte	0x1e4
+ 152 0089 2C000000 		.4byte	0x2c
+ARM GAS  C:\Users\robin\AppData\Local\Temp\ccIcgMXM.s 			page 4
+
+
+ 153 008d 05       		.uleb128 0x5
+ 154 008e 55010000 		.4byte	.LASF12
+ 155 0092 04       		.byte	0x4
+ 156 0093 E501     		.2byte	0x1e5
+ 157 0095 3A000000 		.4byte	0x3a
+ 158 0099 02       		.uleb128 0x2
+ 159 009a 04       		.byte	0x4
+ 160 009b 04       		.byte	0x4
+ 161 009c 70000000 		.4byte	.LASF13
+ 162 00a0 02       		.uleb128 0x2
+ 163 00a1 08       		.byte	0x8
+ 164 00a2 04       		.byte	0x4
+ 165 00a3 4E010000 		.4byte	.LASF14
+ 166 00a7 02       		.uleb128 0x2
+ 167 00a8 01       		.byte	0x1
+ 168 00a9 08       		.byte	0x8
+ 169 00aa EB010000 		.4byte	.LASF15
+ 170 00ae 02       		.uleb128 0x2
+ 171 00af 08       		.byte	0x8
+ 172 00b0 04       		.byte	0x4
+ 173 00b1 0F020000 		.4byte	.LASF16
+ 174 00b5 02       		.uleb128 0x2
+ 175 00b6 04       		.byte	0x4
+ 176 00b7 07       		.byte	0x7
+ 177 00b8 CD010000 		.4byte	.LASF17
+ 178 00bc 06       		.uleb128 0x6
+ 179 00bd 5C010000 		.4byte	.LASF28
+ 180 00c1 01       		.byte	0x1
+ 181 00c2 04       		.byte	0x4
+ 182 00c3 68000000 		.4byte	0x68
+ 183 00c7 00000000 		.4byte	.LFB63
+ 184 00cb 30000000 		.4byte	.LFE63-.LFB63
+ 185 00cf 01       		.uleb128 0x1
+ 186 00d0 9C       		.byte	0x9c
+ 187 00d1 52010000 		.4byte	0x152
+ 188 00d5 07       		.uleb128 0x7
+ 189 00d6 F0010000 		.4byte	.LASF29
+ 190 00da 01       		.byte	0x1
+ 191 00db 08       		.byte	0x8
+ 192 00dc 81000000 		.4byte	0x81
+ 193 00e0 00000000 		.4byte	.LLST0
+ 194 00e4 08       		.uleb128 0x8
+ 195 00e5 06000000 		.4byte	.LVL0
+ 196 00e9 63010000 		.4byte	0x163
+ 197 00ed 09       		.uleb128 0x9
+ 198 00ee 0C000000 		.4byte	.LVL1
+ 199 00f2 6E010000 		.4byte	0x16e
+ 200 00f6 00010000 		.4byte	0x100
+ 201 00fa 0A       		.uleb128 0xa
+ 202 00fb 01       		.uleb128 0x1
+ 203 00fc 50       		.byte	0x50
+ 204 00fd 01       		.uleb128 0x1
+ 205 00fe 31       		.byte	0x31
+ 206 00ff 00       		.byte	0
+ 207 0100 09       		.uleb128 0x9
+ 208 0101 14000000 		.4byte	.LVL2
+ 209 0105 79010000 		.4byte	0x179
+ARM GAS  C:\Users\robin\AppData\Local\Temp\ccIcgMXM.s 			page 5
+
+
+ 210 0109 18010000 		.4byte	0x118
+ 211 010d 0A       		.uleb128 0xa
+ 212 010e 01       		.uleb128 0x1
+ 213 010f 50       		.byte	0x50
+ 214 0110 01       		.uleb128 0x1
+ 215 0111 30       		.byte	0x30
+ 216 0112 0A       		.uleb128 0xa
+ 217 0113 01       		.uleb128 0x1
+ 218 0114 51       		.byte	0x51
+ 219 0115 01       		.uleb128 0x1
+ 220 0116 30       		.byte	0x30
+ 221 0117 00       		.byte	0
+ 222 0118 09       		.uleb128 0x9
+ 223 0119 1A000000 		.4byte	.LVL3
+ 224 011d 84010000 		.4byte	0x184
+ 225 0121 2F010000 		.4byte	0x12f
+ 226 0125 0A       		.uleb128 0xa
+ 227 0126 01       		.uleb128 0x1
+ 228 0127 50       		.byte	0x50
+ 229 0128 05       		.uleb128 0x5
+ 230 0129 03       		.byte	0x3
+ 231 012a 00000000 		.4byte	.LC0
+ 232 012e 00       		.byte	0
+ 233 012f 08       		.uleb128 0x8
+ 234 0130 1E000000 		.4byte	.LVL4
+ 235 0134 8F010000 		.4byte	0x18f
+ 236 0138 08       		.uleb128 0x8
+ 237 0139 22000000 		.4byte	.LVL5
+ 238 013d 9A010000 		.4byte	0x19a
+ 239 0141 0B       		.uleb128 0xb
+ 240 0142 28000000 		.4byte	.LVL6
+ 241 0146 A5010000 		.4byte	0x1a5
+ 242 014a 0A       		.uleb128 0xa
+ 243 014b 01       		.uleb128 0x1
+ 244 014c 50       		.byte	0x50
+ 245 014d 02       		.uleb128 0x2
+ 246 014e 08       		.byte	0x8
+ 247 014f 64       		.byte	0x64
+ 248 0150 00       		.byte	0
+ 249 0151 00       		.byte	0
+ 250 0152 0C       		.uleb128 0xc
+ 251 0153 41010000 		.4byte	.LASF30
+ 252 0157 08       		.byte	0x8
+ 253 0158 1207     		.2byte	0x712
+ 254 015a 5E010000 		.4byte	0x15e
+ 255 015e 0D       		.uleb128 0xd
+ 256 015f 76000000 		.4byte	0x76
+ 257 0163 0E       		.uleb128 0xe
+ 258 0164 76000000 		.4byte	.LASF18
+ 259 0168 76000000 		.4byte	.LASF18
+ 260 016c 05       		.byte	0x5
+ 261 016d 38       		.byte	0x38
+ 262 016e 0E       		.uleb128 0xe
+ 263 016f 00000000 		.4byte	.LASF19
+ 264 0173 00000000 		.4byte	.LASF19
+ 265 0177 05       		.byte	0x5
+ 266 0178 3A       		.byte	0x3a
+ARM GAS  C:\Users\robin\AppData\Local\Temp\ccIcgMXM.s 			page 6
+
+
+ 267 0179 0E       		.uleb128 0xe
+ 268 017a A5010000 		.4byte	.LASF20
+ 269 017e A5010000 		.4byte	.LASF20
+ 270 0182 05       		.byte	0x5
+ 271 0183 3D       		.byte	0x3d
+ 272 0184 0E       		.uleb128 0xe
+ 273 0185 61010000 		.4byte	.LASF21
+ 274 0189 61010000 		.4byte	.LASF21
+ 275 018d 05       		.byte	0x5
+ 276 018e 3C       		.byte	0x3c
+ 277 018f 0E       		.uleb128 0xe
+ 278 0190 71010000 		.4byte	.LASF22
+ 279 0194 71010000 		.4byte	.LASF22
+ 280 0198 06       		.byte	0x6
+ 281 0199 30       		.byte	0x30
+ 282 019a 0E       		.uleb128 0xe
+ 283 019b B2010000 		.4byte	.LASF23
+ 284 019f B2010000 		.4byte	.LASF23
+ 285 01a3 05       		.byte	0x5
+ 286 01a4 61       		.byte	0x61
+ 287 01a5 0E       		.uleb128 0xe
+ 288 01a6 27020000 		.4byte	.LASF24
+ 289 01aa 27020000 		.4byte	.LASF24
+ 290 01ae 07       		.byte	0x7
+ 291 01af 76       		.byte	0x76
+ 292 01b0 00       		.byte	0
+ 293              		.section	.debug_abbrev,"",%progbits
+ 294              	.Ldebug_abbrev0:
+ 295 0000 01       		.uleb128 0x1
+ 296 0001 11       		.uleb128 0x11
+ 297 0002 01       		.byte	0x1
+ 298 0003 25       		.uleb128 0x25
+ 299 0004 0E       		.uleb128 0xe
+ 300 0005 13       		.uleb128 0x13
+ 301 0006 0B       		.uleb128 0xb
+ 302 0007 03       		.uleb128 0x3
+ 303 0008 0E       		.uleb128 0xe
+ 304 0009 1B       		.uleb128 0x1b
+ 305 000a 0E       		.uleb128 0xe
+ 306 000b 55       		.uleb128 0x55
+ 307 000c 17       		.uleb128 0x17
+ 308 000d 11       		.uleb128 0x11
+ 309 000e 01       		.uleb128 0x1
+ 310 000f 10       		.uleb128 0x10
+ 311 0010 17       		.uleb128 0x17
+ 312 0011 00       		.byte	0
+ 313 0012 00       		.byte	0
+ 314 0013 02       		.uleb128 0x2
+ 315 0014 24       		.uleb128 0x24
+ 316 0015 00       		.byte	0
+ 317 0016 0B       		.uleb128 0xb
+ 318 0017 0B       		.uleb128 0xb
+ 319 0018 3E       		.uleb128 0x3e
+ 320 0019 0B       		.uleb128 0xb
+ 321 001a 03       		.uleb128 0x3
+ 322 001b 0E       		.uleb128 0xe
+ 323 001c 00       		.byte	0
+ARM GAS  C:\Users\robin\AppData\Local\Temp\ccIcgMXM.s 			page 7
+
+
+ 324 001d 00       		.byte	0
+ 325 001e 03       		.uleb128 0x3
+ 326 001f 16       		.uleb128 0x16
+ 327 0020 00       		.byte	0
+ 328 0021 03       		.uleb128 0x3
+ 329 0022 0E       		.uleb128 0xe
+ 330 0023 3A       		.uleb128 0x3a
+ 331 0024 0B       		.uleb128 0xb
+ 332 0025 3B       		.uleb128 0x3b
+ 333 0026 0B       		.uleb128 0xb
+ 334 0027 49       		.uleb128 0x49
+ 335 0028 13       		.uleb128 0x13
+ 336 0029 00       		.byte	0
+ 337 002a 00       		.byte	0
+ 338 002b 04       		.uleb128 0x4
+ 339 002c 24       		.uleb128 0x24
+ 340 002d 00       		.byte	0
+ 341 002e 0B       		.uleb128 0xb
+ 342 002f 0B       		.uleb128 0xb
+ 343 0030 3E       		.uleb128 0x3e
+ 344 0031 0B       		.uleb128 0xb
+ 345 0032 03       		.uleb128 0x3
+ 346 0033 08       		.uleb128 0x8
+ 347 0034 00       		.byte	0
+ 348 0035 00       		.byte	0
+ 349 0036 05       		.uleb128 0x5
+ 350 0037 16       		.uleb128 0x16
+ 351 0038 00       		.byte	0
+ 352 0039 03       		.uleb128 0x3
+ 353 003a 0E       		.uleb128 0xe
+ 354 003b 3A       		.uleb128 0x3a
+ 355 003c 0B       		.uleb128 0xb
+ 356 003d 3B       		.uleb128 0x3b
+ 357 003e 05       		.uleb128 0x5
+ 358 003f 49       		.uleb128 0x49
+ 359 0040 13       		.uleb128 0x13
+ 360 0041 00       		.byte	0
+ 361 0042 00       		.byte	0
+ 362 0043 06       		.uleb128 0x6
+ 363 0044 2E       		.uleb128 0x2e
+ 364 0045 01       		.byte	0x1
+ 365 0046 3F       		.uleb128 0x3f
+ 366 0047 19       		.uleb128 0x19
+ 367 0048 03       		.uleb128 0x3
+ 368 0049 0E       		.uleb128 0xe
+ 369 004a 3A       		.uleb128 0x3a
+ 370 004b 0B       		.uleb128 0xb
+ 371 004c 3B       		.uleb128 0x3b
+ 372 004d 0B       		.uleb128 0xb
+ 373 004e 27       		.uleb128 0x27
+ 374 004f 19       		.uleb128 0x19
+ 375 0050 49       		.uleb128 0x49
+ 376 0051 13       		.uleb128 0x13
+ 377 0052 8701     		.uleb128 0x87
+ 378 0054 19       		.uleb128 0x19
+ 379 0055 11       		.uleb128 0x11
+ 380 0056 01       		.uleb128 0x1
+ARM GAS  C:\Users\robin\AppData\Local\Temp\ccIcgMXM.s 			page 8
+
+
+ 381 0057 12       		.uleb128 0x12
+ 382 0058 06       		.uleb128 0x6
+ 383 0059 40       		.uleb128 0x40
+ 384 005a 18       		.uleb128 0x18
+ 385 005b 9742     		.uleb128 0x2117
+ 386 005d 19       		.uleb128 0x19
+ 387 005e 01       		.uleb128 0x1
+ 388 005f 13       		.uleb128 0x13
+ 389 0060 00       		.byte	0
+ 390 0061 00       		.byte	0
+ 391 0062 07       		.uleb128 0x7
+ 392 0063 34       		.uleb128 0x34
+ 393 0064 00       		.byte	0
+ 394 0065 03       		.uleb128 0x3
+ 395 0066 0E       		.uleb128 0xe
+ 396 0067 3A       		.uleb128 0x3a
+ 397 0068 0B       		.uleb128 0xb
+ 398 0069 3B       		.uleb128 0x3b
+ 399 006a 0B       		.uleb128 0xb
+ 400 006b 49       		.uleb128 0x49
+ 401 006c 13       		.uleb128 0x13
+ 402 006d 02       		.uleb128 0x2
+ 403 006e 17       		.uleb128 0x17
+ 404 006f 00       		.byte	0
+ 405 0070 00       		.byte	0
+ 406 0071 08       		.uleb128 0x8
+ 407 0072 898201   		.uleb128 0x4109
+ 408 0075 00       		.byte	0
+ 409 0076 11       		.uleb128 0x11
+ 410 0077 01       		.uleb128 0x1
+ 411 0078 31       		.uleb128 0x31
+ 412 0079 13       		.uleb128 0x13
+ 413 007a 00       		.byte	0
+ 414 007b 00       		.byte	0
+ 415 007c 09       		.uleb128 0x9
+ 416 007d 898201   		.uleb128 0x4109
+ 417 0080 01       		.byte	0x1
+ 418 0081 11       		.uleb128 0x11
+ 419 0082 01       		.uleb128 0x1
+ 420 0083 31       		.uleb128 0x31
+ 421 0084 13       		.uleb128 0x13
+ 422 0085 01       		.uleb128 0x1
+ 423 0086 13       		.uleb128 0x13
+ 424 0087 00       		.byte	0
+ 425 0088 00       		.byte	0
+ 426 0089 0A       		.uleb128 0xa
+ 427 008a 8A8201   		.uleb128 0x410a
+ 428 008d 00       		.byte	0
+ 429 008e 02       		.uleb128 0x2
+ 430 008f 18       		.uleb128 0x18
+ 431 0090 9142     		.uleb128 0x2111
+ 432 0092 18       		.uleb128 0x18
+ 433 0093 00       		.byte	0
+ 434 0094 00       		.byte	0
+ 435 0095 0B       		.uleb128 0xb
+ 436 0096 898201   		.uleb128 0x4109
+ 437 0099 01       		.byte	0x1
+ARM GAS  C:\Users\robin\AppData\Local\Temp\ccIcgMXM.s 			page 9
+
+
+ 438 009a 11       		.uleb128 0x11
+ 439 009b 01       		.uleb128 0x1
+ 440 009c 31       		.uleb128 0x31
+ 441 009d 13       		.uleb128 0x13
+ 442 009e 00       		.byte	0
+ 443 009f 00       		.byte	0
+ 444 00a0 0C       		.uleb128 0xc
+ 445 00a1 34       		.uleb128 0x34
+ 446 00a2 00       		.byte	0
+ 447 00a3 03       		.uleb128 0x3
+ 448 00a4 0E       		.uleb128 0xe
+ 449 00a5 3A       		.uleb128 0x3a
+ 450 00a6 0B       		.uleb128 0xb
+ 451 00a7 3B       		.uleb128 0x3b
+ 452 00a8 05       		.uleb128 0x5
+ 453 00a9 49       		.uleb128 0x49
+ 454 00aa 13       		.uleb128 0x13
+ 455 00ab 3F       		.uleb128 0x3f
+ 456 00ac 19       		.uleb128 0x19
+ 457 00ad 3C       		.uleb128 0x3c
+ 458 00ae 19       		.uleb128 0x19
+ 459 00af 00       		.byte	0
+ 460 00b0 00       		.byte	0
+ 461 00b1 0D       		.uleb128 0xd
+ 462 00b2 35       		.uleb128 0x35
+ 463 00b3 00       		.byte	0
+ 464 00b4 49       		.uleb128 0x49
+ 465 00b5 13       		.uleb128 0x13
+ 466 00b6 00       		.byte	0
+ 467 00b7 00       		.byte	0
+ 468 00b8 0E       		.uleb128 0xe
+ 469 00b9 2E       		.uleb128 0x2e
+ 470 00ba 00       		.byte	0
+ 471 00bb 3F       		.uleb128 0x3f
+ 472 00bc 19       		.uleb128 0x19
+ 473 00bd 3C       		.uleb128 0x3c
+ 474 00be 19       		.uleb128 0x19
+ 475 00bf 6E       		.uleb128 0x6e
+ 476 00c0 0E       		.uleb128 0xe
+ 477 00c1 03       		.uleb128 0x3
+ 478 00c2 0E       		.uleb128 0xe
+ 479 00c3 3A       		.uleb128 0x3a
+ 480 00c4 0B       		.uleb128 0xb
+ 481 00c5 3B       		.uleb128 0x3b
+ 482 00c6 0B       		.uleb128 0xb
+ 483 00c7 00       		.byte	0
+ 484 00c8 00       		.byte	0
+ 485 00c9 00       		.byte	0
+ 486              		.section	.debug_loc,"",%progbits
+ 487              	.Ldebug_loc0:
+ 488              	.LLST0:
+ 489 0000 1E000000 		.4byte	.LVL4
+ 490 0004 21000000 		.4byte	.LVL5-1
+ 491 0008 0100     		.2byte	0x1
+ 492 000a 50       		.byte	0x50
+ 493 000b 00000000 		.4byte	0
+ 494 000f 00000000 		.4byte	0
+ARM GAS  C:\Users\robin\AppData\Local\Temp\ccIcgMXM.s 			page 10
+
+
+ 495              		.section	.debug_aranges,"",%progbits
+ 496 0000 1C000000 		.4byte	0x1c
+ 497 0004 0200     		.2byte	0x2
+ 498 0006 00000000 		.4byte	.Ldebug_info0
+ 499 000a 04       		.byte	0x4
+ 500 000b 00       		.byte	0
+ 501 000c 0000     		.2byte	0
+ 502 000e 0000     		.2byte	0
+ 503 0010 00000000 		.4byte	.LFB63
+ 504 0014 30000000 		.4byte	.LFE63-.LFB63
+ 505 0018 00000000 		.4byte	0
+ 506 001c 00000000 		.4byte	0
+ 507              		.section	.debug_ranges,"",%progbits
+ 508              	.Ldebug_ranges0:
+ 509 0000 00000000 		.4byte	.LFB63
+ 510 0004 30000000 		.4byte	.LFE63
+ 511 0008 00000000 		.4byte	0
+ 512 000c 00000000 		.4byte	0
+ 513              		.section	.debug_line,"",%progbits
+ 514              	.Ldebug_line0:
+ 515 0000 A2010000 		.section	.debug_str,"MS",%progbits,1
+ 515      02007001 
+ 515      00000201 
+ 515      FB0E0D00 
+ 515      01010101 
+ 516              	.LASF19:
+ 517 0000 4C43445F 		.ascii	"LCD_WriteControl\000"
+ 517      57726974 
+ 517      65436F6E 
+ 517      74726F6C 
+ 517      00
+ 518              	.LASF9:
+ 519 0011 5F5F696E 		.ascii	"__int32_t\000"
+ 519      7433325F 
+ 519      7400
+ 520              	.LASF27:
+ 521 001b 433A5C55 		.ascii	"C:\\Users\\robin\\Universidad\\Tercero\\2o_Cuat\\DS"
+ 521      73657273 
+ 521      5C726F62 
+ 521      696E5C55 
+ 521      6E697665 
+ 522 0048 455C5072 		.ascii	"E\\Practicas\\Practicas\\Practica2.3.cydsn\000"
+ 522      61637469 
+ 522      6361735C 
+ 522      50726163 
+ 522      74696361 
+ 523              	.LASF13:
+ 524 0070 666C6F61 		.ascii	"float\000"
+ 524      7400
+ 525              	.LASF18:
+ 526 0076 4C43445F 		.ascii	"LCD_Start\000"
+ 526      53746172 
+ 526      7400
+ 527              	.LASF1:
+ 528 0080 756E7369 		.ascii	"unsigned char\000"
+ 528      676E6564 
+ 528      20636861 
+ARM GAS  C:\Users\robin\AppData\Local\Temp\ccIcgMXM.s 			page 11
+
+
+ 528      7200
+ 529              	.LASF25:
+ 530 008e 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 530      43313120 
+ 530      352E342E 
+ 530      31203230 
+ 530      31363036 
+ 531 00c1 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 531      20726576 
+ 531      6973696F 
+ 531      6E203233 
+ 531      37373135 
+ 532 00f4 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 532      66756E63 
+ 532      74696F6E 
+ 532      2D736563 
+ 532      74696F6E 
+ 533              	.LASF5:
+ 534 011c 6C6F6E67 		.ascii	"long unsigned int\000"
+ 534      20756E73 
+ 534      69676E65 
+ 534      6420696E 
+ 534      7400
+ 535              	.LASF3:
+ 536 012e 73686F72 		.ascii	"short unsigned int\000"
+ 536      7420756E 
+ 536      7369676E 
+ 536      65642069 
+ 536      6E7400
+ 537              	.LASF30:
+ 538 0141 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 538      52784275 
+ 538      66666572 
+ 538      00
+ 539              	.LASF14:
+ 540 014e 646F7562 		.ascii	"double\000"
+ 540      6C6500
+ 541              	.LASF12:
+ 542 0155 75696E74 		.ascii	"uint16\000"
+ 542      313600
+ 543              	.LASF28:
+ 544 015c 6D61696E 		.ascii	"main\000"
+ 544      00
+ 545              	.LASF21:
+ 546 0161 4C43445F 		.ascii	"LCD_PrintString\000"
+ 546      5072696E 
+ 546      74537472 
+ 546      696E6700 
+ 547              	.LASF22:
+ 548 0171 53746174 		.ascii	"Status_Reg_Read\000"
+ 548      75735F52 
+ 548      65675F52 
+ 548      65616400 
+ 549              	.LASF8:
+ 550 0181 756E7369 		.ascii	"unsigned int\000"
+ 550      676E6564 
+ 550      20696E74 
+ARM GAS  C:\Users\robin\AppData\Local\Temp\ccIcgMXM.s 			page 12
+
+
+ 550      00
+ 551              	.LASF7:
+ 552 018e 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 552      206C6F6E 
+ 552      6720756E 
+ 552      7369676E 
+ 552      65642069 
+ 553              	.LASF20:
+ 554 01a5 4C43445F 		.ascii	"LCD_Position\000"
+ 554      506F7369 
+ 554      74696F6E 
+ 554      00
+ 555              	.LASF23:
+ 556 01b2 4C43445F 		.ascii	"LCD_PrintU32Number\000"
+ 556      5072696E 
+ 556      74553332 
+ 556      4E756D62 
+ 556      657200
+ 557              	.LASF10:
+ 558 01c5 696E7433 		.ascii	"int32_t\000"
+ 558      325F7400 
+ 559              	.LASF17:
+ 560 01cd 73697A65 		.ascii	"sizetype\000"
+ 560      74797065 
+ 560      00
+ 561              	.LASF6:
+ 562 01d6 6C6F6E67 		.ascii	"long long int\000"
+ 562      206C6F6E 
+ 562      6720696E 
+ 562      7400
+ 563              	.LASF26:
+ 564 01e4 6D61696E 		.ascii	"main.c\000"
+ 564      2E6300
+ 565              	.LASF15:
+ 566 01eb 63686172 		.ascii	"char\000"
+ 566      00
+ 567              	.LASF29:
+ 568 01f0 636F756E 		.ascii	"count\000"
+ 568      7400
+ 569              	.LASF2:
+ 570 01f6 73686F72 		.ascii	"short int\000"
+ 570      7420696E 
+ 570      7400
+ 571              	.LASF11:
+ 572 0200 75696E74 		.ascii	"uint8\000"
+ 572      3800
+ 573              	.LASF4:
+ 574 0206 6C6F6E67 		.ascii	"long int\000"
+ 574      20696E74 
+ 574      00
+ 575              	.LASF16:
+ 576 020f 6C6F6E67 		.ascii	"long double\000"
+ 576      20646F75 
+ 576      626C6500 
+ 577              	.LASF0:
+ 578 021b 7369676E 		.ascii	"signed char\000"
+ 578      65642063 
+ARM GAS  C:\Users\robin\AppData\Local\Temp\ccIcgMXM.s 			page 13
+
+
+ 578      68617200 
+ 579              	.LASF24:
+ 580 0227 43794465 		.ascii	"CyDelay\000"
+ 580      6C617900 
+ 581              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

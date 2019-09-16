@@ -1,0 +1,35 @@
+dont_use_io iocell 1 0
+dont_use_io iocell 1 1
+dont_use_io iocell 1 3
+set_location "Net_70" macrocell 1 3 0 0
+set_location "Net_71" macrocell 1 3 0 1
+set_location "Net_231" macrocell 0 3 0 0
+set_location "cydff_3" macrocell 1 3 1 2
+set_location "Net_72" macrocell 1 3 0 2
+set_location "cydff_1" macrocell 1 3 0 3
+set_location "Net_73" macrocell 1 3 1 0
+set_location "Net_230" macrocell 0 3 0 1
+set_location "cydff_4" macrocell 1 3 1 3
+set_location "cydff_2" macrocell 1 3 1 1
+# Note: port 12 is the logical name for port 7
+set_io "\LCD:LCDPort(6)\" iocell 12 6
+# Note: port 12 is the logical name for port 7
+set_io "\LCD:LCDPort(5)\" iocell 12 5
+# Note: port 12 is the logical name for port 7
+set_io "\LCD:LCDPort(3)\" iocell 12 3
+# Note: port 12 is the logical name for port 7
+set_io "\LCD:LCDPort(4)\" iocell 12 4
+set_location "\Paso_erroneo:sts:sts_reg\" statuscell 0 3 3 
+set_io "Marcar(0)" iocell 1 6
+set_location "\Reloj_controlado:Sync:ctrl_reg\" controlcell 0 3 6 
+set_location "\Paso_sig:Sync:ctrl_reg\" controlcell 1 3 6 
+set_location "ClockBlock" clockblockcell -1 -1 0
+# Note: port 12 is the logical name for port 7
+set_io "\LCD:LCDPort(0)\" iocell 12 0
+set_io "Siguiente(0)" iocell 1 7
+set_location "\Paso_actual:sts:sts_reg\" statuscell 1 3 3 
+set_location "\Ultimo_Paso:sts:sts_reg\" statuscell 1 4 3 
+# Note: port 12 is the logical name for port 7
+set_io "\LCD:LCDPort(2)\" iocell 12 2
+# Note: port 12 is the logical name for port 7
+set_io "\LCD:LCDPort(1)\" iocell 12 1

@@ -1,0 +1,12 @@
+C:\Users\eleni\Desktop\DSE\Practicas\Practicas\Practica4.2.cydsn\Practica4.2.cyprj|1124440c-6e28-4138-998c-1de7d98d4ba7
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|49ad23ef-e15d-41d6-9412-5c07b3670510
+C:\Users\eleni\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|cd6eb6d2-baaf-4d24-8ce4-87717313e265
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|1b194f77-8b76-4d32-b00e-73bac25d2d90
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|548e3ec0-ab48-480f-bf02-05eafe6ecbe7
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|976a924b-8d12-41be-8333-80209ef00c0b
+C:\Users\eleni\Desktop\DSE\Practicas\Practicas\Practica1.cydsn\Practica1.cyprj|8c75f20a-d13b-44cd-8c14-3971fde493b0
+C:\Users\eleni\Desktop\DSE\Practicas\Practicas\Practica2.cydsn\Practica2.cyprj|c58c5073-3500-4a3a-81ec-485ced4431dc
+C:\Users\eleni\Desktop\DSE\Practicas\Practicas\Practica2.3.cydsn\Practica2.3.cyprj|2a85f7c9-220d-4ccb-ba12-4d3794f31577
+C:\Users\eleni\Desktop\DSE\Practicas\Practicas\Practica2.4.cydsn\Practica2.4.cyprj|8b02387b-ad3f-432d-b1cb-c24a1c9f7da0
+C:\Users\eleni\Desktop\DSE\Practicas\Practicas\Practica2.5.cydsn\Practica2.5.cyprj|d1190d33-5dc2-40e8-9290-8321f4df8559
+C:\Users\eleni\Desktop\DSE\Practicas\Practicas\Practica3.cydsn\Practica3.cyprj|05c494c9-c167-4077-994b-5694d0957483

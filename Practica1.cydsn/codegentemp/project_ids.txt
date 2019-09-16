@@ -1,0 +1,6 @@
+C:\Users\robin\Universidad\Tercero\2o_Cuat\DSE\Practicas\Practicas\Practica1.cydsn\Practica1.cyprj|a8da6398-21e8-4280-9358-800395a54dba
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|b50290c9-e168-42bb-8b93-2d9db4cd690b
+C:\Users\robin\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|09e4b9ee-a298-4c4c-8cfe-9c078f66caa2
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|4c77bbae-aa3c-4e3d-b645-a97ef08cd4ae
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|46d592aa-9a2c-4717-ae3c-9baeb1854390
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|b09b3efd-7aa1-475e-90d6-497ad1c54b5e

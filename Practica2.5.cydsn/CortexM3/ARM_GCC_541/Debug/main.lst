@@ -1,0 +1,1874 @@
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.main,"ax",%progbits
+  20              		.align	2
+  21              		.global	main
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	main, %function
+  25              	main:
+  26              	.LFB63:
+  27              		.file 1 "main.c"
+   1:main.c        **** #include "project.h"
+   2:main.c        **** 
+   3:main.c        **** 
+   4:main.c        **** int main()
+   5:main.c        **** {
+  28              		.loc 1 5 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 16
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+  33              		.cfi_def_cfa_offset 32
+  34              		.cfi_offset 4, -32
+  35              		.cfi_offset 5, -28
+  36              		.cfi_offset 6, -24
+  37              		.cfi_offset 7, -20
+  38              		.cfi_offset 8, -16
+  39              		.cfi_offset 9, -12
+  40              		.cfi_offset 10, -8
+  41              		.cfi_offset 14, -4
+  42 0004 84B0     		sub	sp, sp, #16
+  43              		.cfi_def_cfa_offset 48
+   6:main.c        ****     
+   7:main.c        ****     int estado[4] = {0,0,0,0};
+  44              		.loc 1 7 0
+  45 0006 0024     		movs	r4, #0
+  46 0008 0094     		str	r4, [sp]
+  47 000a 0194     		str	r4, [sp, #4]
+  48 000c 0294     		str	r4, [sp, #8]
+  49 000e 0394     		str	r4, [sp, #12]
+  50              	.LVL0:
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 2
+
+
+   8:main.c        ****     int pos = 0;
+   9:main.c        ****     int error = 0;
+  10:main.c        ****     
+  11:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+  51              		.loc 1 11 0
+  52              		.syntax unified
+  53              	@ 11 "main.c" 1
+  54 0010 62B6     		CPSIE   i
+  55              	@ 0 "" 2
+  56              	.LVL1:
+  12:main.c        ****     
+  13:main.c        ****     int uestado = estado[0]+(estado[1]<<1)+(estado[2]<<2)+(estado[3]<<3);
+  14:main.c        ****     
+  15:main.c        ****     Paso_sig_Write(uestado);
+  57              		.loc 1 15 0
+  58              		.thumb
+  59              		.syntax unified
+  60 0012 2046     		mov	r0, r4
+  61 0014 FFF7FEFF 		bl	Paso_sig_Write
+  62              	.LVL2:
+  16:main.c        ****     LCD_Start();
+  63              		.loc 1 16 0
+  64 0018 FFF7FEFF 		bl	LCD_Start
+  65              	.LVL3:
+  66              	.L18:
+  17:main.c        ****     for(;;)
+  18:main.c        ****     {   
+  19:main.c        ****         if (!Siguiente_Read()) {
+  67              		.loc 1 19 0
+  68 001c FFF7FEFF 		bl	Siguiente_Read
+  69              	.LVL4:
+  70 0020 68B9     		cbnz	r0, .L2
+  20:main.c        ****             pos = (pos+1)%4;
+  71              		.loc 1 20 0
+  72 0022 631C     		adds	r3, r4, #1
+  73 0024 764A     		ldr	r2, .L20
+  74 0026 1340     		ands	r3, r3, r2
+  75 0028 03D5     		bpl	.L3
+  76 002a 013B     		subs	r3, r3, #1
+  77 002c 63F00303 		orn	r3, r3, #3
+  78 0030 0133     		adds	r3, r3, #1
+  79              	.L3:
+  80 0032 1C46     		mov	r4, r3
+  81              	.LVL5:
+  82              	.L4:
+  21:main.c        ****             while(!Siguiente_Read()){}
+  83              		.loc 1 21 0 discriminator 1
+  84 0034 FFF7FEFF 		bl	Siguiente_Read
+  85              	.LVL6:
+  86 0038 0028     		cmp	r0, #0
+  87 003a FBD0     		beq	.L4
+  88 003c 45E0     		b	.L5
+  89              	.L2:
+  22:main.c        ****         } else if (!Marcar_Read()) {
+  90              		.loc 1 22 0
+  91 003e FFF7FEFF 		bl	Marcar_Read
+  92              	.LVL7:
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 3
+
+
+  93 0042 0028     		cmp	r0, #0
+  94 0044 41D1     		bne	.L5
+  23:main.c        ****             if (pos != 3) {
+  95              		.loc 1 23 0
+  96 0046 032C     		cmp	r4, #3
+  97 0048 25D0     		beq	.L6
+  24:main.c        ****                 if ((estado[0] == 0 && estado[pos+1] == 0)||(estado[0] == 1 && estado[pos+1] == 1))
+  98              		.loc 1 24 0
+  99 004a 009B     		ldr	r3, [sp]
+ 100 004c 33B9     		cbnz	r3, .L7
+ 101              		.loc 1 24 0 is_stmt 0 discriminator 1
+ 102 004e 621C     		adds	r2, r4, #1
+ 103 0050 04A9     		add	r1, sp, #16
+ 104 0052 01EB8202 		add	r2, r1, r2, lsl #2
+ 105 0056 52F8102C 		ldr	r2, [r2, #-16]
+ 106 005a 4AB1     		cbz	r2, .L8
+ 107              	.L7:
+ 108              		.loc 1 24 0 discriminator 3
+ 109 005c 012B     		cmp	r3, #1
+ 110 005e 1AD1     		bne	.L6
+ 111              		.loc 1 24 0 discriminator 4
+ 112 0060 631C     		adds	r3, r4, #1
+ 113 0062 04AA     		add	r2, sp, #16
+ 114 0064 02EB8303 		add	r3, r2, r3, lsl #2
+ 115 0068 53F8103C 		ldr	r3, [r3, #-16]
+ 116 006c 012B     		cmp	r3, #1
+ 117 006e 12D1     		bne	.L6
+ 118              	.L8:
+  25:main.c        ****                     estado[pos+1] = (estado[pos+1]+1)%2;
+ 119              		.loc 1 25 0 is_stmt 1
+ 120 0070 621C     		adds	r2, r4, #1
+ 121 0072 04AB     		add	r3, sp, #16
+ 122 0074 03EB8203 		add	r3, r3, r2, lsl #2
+ 123 0078 53F8103C 		ldr	r3, [r3, #-16]
+ 124 007c 0133     		adds	r3, r3, #1
+ 125 007e 6149     		ldr	r1, .L20+4
+ 126 0080 0B40     		ands	r3, r3, r1
+ 127 0082 03D5     		bpl	.L9
+ 128 0084 013B     		subs	r3, r3, #1
+ 129 0086 63F00103 		orn	r3, r3, #1
+ 130 008a 0133     		adds	r3, r3, #1
+ 131              	.L9:
+ 132 008c 04A9     		add	r1, sp, #16
+ 133 008e 01EB8202 		add	r2, r1, r2, lsl #2
+ 134 0092 42F8103C 		str	r3, [r2, #-16]
+ 135              	.L6:
+  26:main.c        ****             }
+  27:main.c        ****                 
+  28:main.c        ****             //Damos un pulso de reloj
+  29:main.c        ****             Reloj_controlado_Write(1);
+ 136              		.loc 1 29 0
+ 137 0096 0120     		movs	r0, #1
+ 138 0098 FFF7FEFF 		bl	Reloj_controlado_Write
+ 139              	.LVL8:
+  30:main.c        ****             Reloj_controlado_Write(0);
+ 140              		.loc 1 30 0
+ 141 009c 0020     		movs	r0, #0
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 4
+
+
+ 142 009e FFF7FEFF 		bl	Reloj_controlado_Write
+ 143              	.LVL9:
+  31:main.c        ****             
+  32:main.c        ****             //El estado sera la combinacion de tu posicion(granjero) mas la de los tres componentes
+  33:main.c        ****             uestado = estado[0]+(estado[1]<<1)+(estado[2]<<2)+(estado[3]<<3);
+ 144              		.loc 1 33 0
+ 145 00a2 009D     		ldr	r5, [sp]
+ 146 00a4 019B     		ldr	r3, [sp, #4]
+ 147 00a6 05EB4303 		add	r3, r5, r3, lsl #1
+ 148 00aa 0298     		ldr	r0, [sp, #8]
+ 149 00ac 03EB8003 		add	r3, r3, r0, lsl #2
+ 150 00b0 0398     		ldr	r0, [sp, #12]
+ 151 00b2 03EBC000 		add	r0, r3, r0, lsl #3
+ 152              	.LVL10:
+  34:main.c        ****             Paso_sig_Write(uestado);
+ 153              		.loc 1 34 0
+ 154 00b6 C0B2     		uxtb	r0, r0
+ 155              	.LVL11:
+ 156 00b8 FFF7FEFF 		bl	Paso_sig_Write
+ 157              	.LVL12:
+  35:main.c        ****             
+  36:main.c        ****             estado[0] = 1-estado[0];
+ 158              		.loc 1 36 0
+ 159 00bc C5F10105 		rsb	r5, r5, #1
+ 160              	.LVL13:
+ 161 00c0 0095     		str	r5, [sp]
+ 162              	.LVL14:
+ 163              	.L10:
+  37:main.c        ****             
+  38:main.c        ****             //Esperamos a que el usuario le de al boton de marcar para continuar
+  39:main.c        ****             while(!Marcar_Read());
+ 164              		.loc 1 39 0 discriminator 1
+ 165 00c2 FFF7FEFF 		bl	Marcar_Read
+ 166              	.LVL15:
+ 167 00c6 0028     		cmp	r0, #0
+ 168 00c8 FBD0     		beq	.L10
+ 169              	.LVL16:
+ 170              	.L5:
+  40:main.c        ****         }
+  41:main.c        ****         //Comprobamos si el paso escogido es erroneo
+  42:main.c        ****         error = Paso_erroneo_Read();
+ 171              		.loc 1 42 0
+ 172 00ca FFF7FEFF 		bl	Paso_erroneo_Read
+ 173              	.LVL17:
+ 174 00ce 0546     		mov	r5, r0
+ 175              	.LVL18:
+  43:main.c        ****         
+  44:main.c        ****         LCD_ClearDisplay();
+ 176              		.loc 1 44 0
+ 177 00d0 0120     		movs	r0, #1
+ 178              	.LVL19:
+ 179 00d2 FFF7FEFF 		bl	LCD_WriteControl
+ 180              	.LVL20:
+  45:main.c        ****         LCD_Position(0,0);
+ 181              		.loc 1 45 0
+ 182 00d6 0021     		movs	r1, #0
+ 183 00d8 0846     		mov	r0, r1
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 5
+
+
+ 184 00da FFF7FEFF 		bl	LCD_Position
+ 185              	.LVL21:
+  46:main.c        ****         
+  47:main.c        ****         //Imprimimos en el LCD por que ha perdido el jugador, segun el codigo de error devuelto
+  48:main.c        ****         if (error == 1) {            
+ 186              		.loc 1 48 0
+ 187 00de 012D     		cmp	r5, #1
+ 188 00e0 0ED1     		bne	.L11
+  49:main.c        **** 		    LCD_PrintString("La gallina te");
+ 189              		.loc 1 49 0
+ 190 00e2 4948     		ldr	r0, .L20+8
+ 191 00e4 FFF7FEFF 		bl	LCD_PrintString
+ 192              	.LVL22:
+  50:main.c        ****             LCD_Position(1,0);
+ 193              		.loc 1 50 0
+ 194 00e8 0021     		movs	r1, #0
+ 195 00ea 0120     		movs	r0, #1
+ 196 00ec FFF7FEFF 		bl	LCD_Position
+ 197              	.LVL23:
+  51:main.c        **** 		    LCD_PrintString("dejo sin maiz");
+ 198              		.loc 1 51 0
+ 199 00f0 4648     		ldr	r0, .L20+12
+ 200 00f2 FFF7FEFF 		bl	LCD_PrintString
+ 201              	.LVL24:
+  52:main.c        ****             
+  53:main.c        ****             CyDelay(10000);
+ 202              		.loc 1 53 0
+ 203 00f6 42F21070 		movw	r0, #10000
+ 204 00fa FFF7FEFF 		bl	CyDelay
+ 205              	.LVL25:
+ 206 00fe 7BE0     		b	.L12
+ 207              	.L11:
+  54:main.c        ****         } else if (error == 2) {            
+ 208              		.loc 1 54 0
+ 209 0100 022D     		cmp	r5, #2
+ 210 0102 0ED1     		bne	.L13
+  55:main.c        **** 		    LCD_PrintString("La gallina ya no");
+ 211              		.loc 1 55 0
+ 212 0104 4248     		ldr	r0, .L20+16
+ 213 0106 FFF7FEFF 		bl	LCD_PrintString
+ 214              	.LVL26:
+  56:main.c        **** 		    LCD_Position(1,0);
+ 215              		.loc 1 56 0
+ 216 010a 0021     		movs	r1, #0
+ 217 010c 0120     		movs	r0, #1
+ 218 010e FFF7FEFF 		bl	LCD_Position
+ 219              	.LVL27:
+  57:main.c        **** 		    LCD_PrintString("te dara problema");
+ 220              		.loc 1 57 0
+ 221 0112 4048     		ldr	r0, .L20+20
+ 222 0114 FFF7FEFF 		bl	LCD_PrintString
+ 223              	.LVL28:
+  58:main.c        ****             CyDelay(10000);
+ 224              		.loc 1 58 0
+ 225 0118 42F21070 		movw	r0, #10000
+ 226 011c FFF7FEFF 		bl	CyDelay
+ 227              	.LVL29:
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 6
+
+
+ 228 0120 6AE0     		b	.L12
+ 229              	.L13:
+  59:main.c        ****         } else if (Paso_actual_Read() != (Ultimo_Paso_Read()+1) && (Paso_actual_Read() != Ultimo_Pa
+ 230              		.loc 1 59 0
+ 231 0122 FFF7FEFF 		bl	Paso_actual_Read
+ 232              	.LVL30:
+ 233 0126 0546     		mov	r5, r0
+ 234              	.LVL31:
+ 235 0128 FFF7FEFF 		bl	Ultimo_Paso_Read
+ 236              	.LVL32:
+ 237 012c 0130     		adds	r0, r0, #1
+ 238 012e 8542     		cmp	r5, r0
+ 239 0130 0ED0     		beq	.L14
+ 240              		.loc 1 59 0 is_stmt 0 discriminator 1
+ 241 0132 FFF7FEFF 		bl	Paso_actual_Read
+ 242              	.LVL33:
+ 243 0136 0546     		mov	r5, r0
+ 244 0138 FFF7FEFF 		bl	Ultimo_Paso_Read
+ 245              	.LVL34:
+ 246 013c 8542     		cmp	r5, r0
+ 247 013e 07D0     		beq	.L14
+  60:main.c        ****             LCD_PrintString("Paso incorrecto");
+ 248              		.loc 1 60 0 is_stmt 1
+ 249 0140 3548     		ldr	r0, .L20+24
+ 250 0142 FFF7FEFF 		bl	LCD_PrintString
+ 251              	.LVL35:
+  61:main.c        ****             CyDelay(5000);
+ 252              		.loc 1 61 0
+ 253 0146 41F28830 		movw	r0, #5000
+ 254 014a FFF7FEFF 		bl	CyDelay
+ 255              	.LVL36:
+ 256 014e 53E0     		b	.L12
+ 257              	.L14:
+  62:main.c        ****         } else if (Paso_actual_Read() == 7U) {
+ 258              		.loc 1 62 0
+ 259 0150 FFF7FEFF 		bl	Paso_actual_Read
+ 260              	.LVL37:
+ 261 0154 0728     		cmp	r0, #7
+ 262 0156 03D1     		bne	.L15
+  63:main.c        ****             LCD_PrintString("Tremenda jugada!");
+ 263              		.loc 1 63 0
+ 264 0158 3048     		ldr	r0, .L20+28
+ 265 015a FFF7FEFF 		bl	LCD_PrintString
+ 266              	.LVL38:
+ 267 015e 4BE0     		b	.L12
+ 268              	.L15:
+  64:main.c        ****         } else {      
+  65:main.c        ****             
+  66:main.c        ****     		LCD_PrintString(" M:");
+ 269              		.loc 1 66 0
+ 270 0160 DFF8C4A0 		ldr	r10, .L20+40
+ 271 0164 5046     		mov	r0, r10
+ 272 0166 FFF7FEFF 		bl	LCD_PrintString
+ 273              	.LVL39:
+  67:main.c        ****             LCD_PrintDecUint16(1-estado[1]);
+ 274              		.loc 1 67 0
+ 275 016a DDF80490 		ldr	r9, [sp, #4]
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 7
+
+
+ 276 016e C9F10100 		rsb	r0, r9, #1
+ 277 0172 80B2     		uxth	r0, r0
+ 278 0174 FFF7FEFF 		bl	LCD_PrintU32Number
+ 279              	.LVL40:
+  68:main.c        ****             
+  69:main.c        ****             LCD_PrintString(" G:");
+ 280              		.loc 1 69 0
+ 281 0178 DFF8B080 		ldr	r8, .L20+44
+ 282 017c 4046     		mov	r0, r8
+ 283 017e FFF7FEFF 		bl	LCD_PrintString
+ 284              	.LVL41:
+  70:main.c        ****             LCD_PrintDecUint16(1-estado[2]);
+ 285              		.loc 1 70 0
+ 286 0182 029F     		ldr	r7, [sp, #8]
+ 287 0184 C7F10100 		rsb	r0, r7, #1
+ 288 0188 80B2     		uxth	r0, r0
+ 289 018a FFF7FEFF 		bl	LCD_PrintU32Number
+ 290              	.LVL42:
+  71:main.c        ****             
+  72:main.c        ****             LCD_PrintString(" Z:");
+ 291              		.loc 1 72 0
+ 292 018e 244E     		ldr	r6, .L20+32
+ 293 0190 3046     		mov	r0, r6
+ 294 0192 FFF7FEFF 		bl	LCD_PrintString
+ 295              	.LVL43:
+  73:main.c        ****             LCD_PrintDecUint16(1-estado[3]);
+ 296              		.loc 1 73 0
+ 297 0196 039D     		ldr	r5, [sp, #12]
+ 298 0198 C5F10100 		rsb	r0, r5, #1
+ 299 019c 80B2     		uxth	r0, r0
+ 300 019e FFF7FEFF 		bl	LCD_PrintU32Number
+ 301              	.LVL44:
+  74:main.c        ****             
+  75:main.c        ****             LCD_Position(1,0);
+ 302              		.loc 1 75 0
+ 303 01a2 0021     		movs	r1, #0
+ 304 01a4 0120     		movs	r0, #1
+ 305 01a6 FFF7FEFF 		bl	LCD_Position
+ 306              	.LVL45:
+  76:main.c        ****     		LCD_PrintString(" M:");
+ 307              		.loc 1 76 0
+ 308 01aa 5046     		mov	r0, r10
+ 309 01ac FFF7FEFF 		bl	LCD_PrintString
+ 310              	.LVL46:
+  77:main.c        ****             LCD_PrintDecUint16(estado[1]);
+ 311              		.loc 1 77 0
+ 312 01b0 1FFA89F0 		uxth	r0, r9
+ 313 01b4 FFF7FEFF 		bl	LCD_PrintU32Number
+ 314              	.LVL47:
+  78:main.c        ****             
+  79:main.c        ****             LCD_PrintString(" G:");
+ 315              		.loc 1 79 0
+ 316 01b8 4046     		mov	r0, r8
+ 317 01ba FFF7FEFF 		bl	LCD_PrintString
+ 318              	.LVL48:
+  80:main.c        ****             LCD_PrintDecUint16(estado[2]);
+ 319              		.loc 1 80 0
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 8
+
+
+ 320 01be B8B2     		uxth	r0, r7
+ 321 01c0 FFF7FEFF 		bl	LCD_PrintU32Number
+ 322              	.LVL49:
+  81:main.c        ****             
+  82:main.c        ****             LCD_PrintString(" Z:");
+ 323              		.loc 1 82 0
+ 324 01c4 3046     		mov	r0, r6
+ 325 01c6 FFF7FEFF 		bl	LCD_PrintString
+ 326              	.LVL50:
+  83:main.c        ****             LCD_PrintDecUint16(estado[3]);
+ 327              		.loc 1 83 0
+ 328 01ca A8B2     		uxth	r0, r5
+ 329 01cc FFF7FEFF 		bl	LCD_PrintU32Number
+ 330              	.LVL51:
+  84:main.c        ****             if (pos != 3) {
+ 331              		.loc 1 84 0
+ 332 01d0 032C     		cmp	r4, #3
+ 333 01d2 11D0     		beq	.L12
+  85:main.c        ****                 if (estado[0] == 0)
+ 334              		.loc 1 85 0
+ 335 01d4 009B     		ldr	r3, [sp]
+ 336 01d6 33B9     		cbnz	r3, .L16
+  86:main.c        ****                     LCD_Position(0,(pos*4));
+ 337              		.loc 1 86 0
+ 338 01d8 A100     		lsls	r1, r4, #2
+ 339 01da 01F0FC01 		and	r1, r1, #252
+ 340 01de 0020     		movs	r0, #0
+ 341 01e0 FFF7FEFF 		bl	LCD_Position
+ 342              	.LVL52:
+ 343 01e4 05E0     		b	.L17
+ 344              	.L16:
+  87:main.c        ****                 else
+  88:main.c        ****                     LCD_Position(1,(pos*4));
+ 345              		.loc 1 88 0
+ 346 01e6 A100     		lsls	r1, r4, #2
+ 347 01e8 01F0FC01 		and	r1, r1, #252
+ 348 01ec 0120     		movs	r0, #1
+ 349 01ee FFF7FEFF 		bl	LCD_Position
+ 350              	.LVL53:
+ 351              	.L17:
+  89:main.c        ****                 LCD_PrintString("*");
+ 352              		.loc 1 89 0
+ 353 01f2 0C48     		ldr	r0, .L20+36
+ 354 01f4 FFF7FEFF 		bl	LCD_PrintString
+ 355              	.LVL54:
+ 356              	.L12:
+  90:main.c        ****             }
+  91:main.c        ****         }        
+  92:main.c        **** 
+  93:main.c        ****         CyDelay(100);
+ 357              		.loc 1 93 0
+ 358 01f8 6420     		movs	r0, #100
+ 359 01fa FFF7FEFF 		bl	CyDelay
+ 360              	.LVL55:
+  94:main.c        ****     }
+ 361              		.loc 1 94 0
+ 362 01fe 0DE7     		b	.L18
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 9
+
+
+ 363              	.L21:
+ 364              		.align	2
+ 365              	.L20:
+ 366 0200 03000080 		.word	-2147483645
+ 367 0204 01000080 		.word	-2147483647
+ 368 0208 00000000 		.word	.LC0
+ 369 020c 10000000 		.word	.LC1
+ 370 0210 20000000 		.word	.LC2
+ 371 0214 34000000 		.word	.LC3
+ 372 0218 48000000 		.word	.LC4
+ 373 021c 58000000 		.word	.LC5
+ 374 0220 74000000 		.word	.LC8
+ 375 0224 78000000 		.word	.LC9
+ 376 0228 6C000000 		.word	.LC6
+ 377 022c 70000000 		.word	.LC7
+ 378              		.cfi_endproc
+ 379              	.LFE63:
+ 380              		.size	main, .-main
+ 381              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 382              		.align	2
+ 383              	.LC0:
+ 384 0000 4C612067 		.ascii	"La gallina te\000"
+ 384      616C6C69 
+ 384      6E612074 
+ 384      6500
+ 385 000e 0000     		.space	2
+ 386              	.LC1:
+ 387 0010 64656A6F 		.ascii	"dejo sin maiz\000"
+ 387      2073696E 
+ 387      206D6169 
+ 387      7A00
+ 388 001e 0000     		.space	2
+ 389              	.LC2:
+ 390 0020 4C612067 		.ascii	"La gallina ya no\000"
+ 390      616C6C69 
+ 390      6E612079 
+ 390      61206E6F 
+ 390      00
+ 391 0031 000000   		.space	3
+ 392              	.LC3:
+ 393 0034 74652064 		.ascii	"te dara problema\000"
+ 393      61726120 
+ 393      70726F62 
+ 393      6C656D61 
+ 393      00
+ 394 0045 000000   		.space	3
+ 395              	.LC4:
+ 396 0048 5061736F 		.ascii	"Paso incorrecto\000"
+ 396      20696E63 
+ 396      6F727265 
+ 396      63746F00 
+ 397              	.LC5:
+ 398 0058 5472656D 		.ascii	"Tremenda jugada!\000"
+ 398      656E6461 
+ 398      206A7567 
+ 398      61646121 
+ 398      00
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 10
+
+
+ 399 0069 000000   		.space	3
+ 400              	.LC6:
+ 401 006c 204D3A00 		.ascii	" M:\000"
+ 402              	.LC7:
+ 403 0070 20473A00 		.ascii	" G:\000"
+ 404              	.LC8:
+ 405 0074 205A3A00 		.ascii	" Z:\000"
+ 406              	.LC9:
+ 407 0078 2A00     		.ascii	"*\000"
+ 408              		.text
+ 409              	.Letext0:
+ 410              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 411              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 412              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 413              		.file 5 "Generated_Source\\PSoC5/Paso_sig.h"
+ 414              		.file 6 "Generated_Source\\PSoC5/LCD.h"
+ 415              		.file 7 "Generated_Source\\PSoC5/Siguiente.h"
+ 416              		.file 8 "Generated_Source\\PSoC5/Marcar.h"
+ 417              		.file 9 "Generated_Source\\PSoC5/Reloj_controlado.h"
+ 418              		.file 10 "Generated_Source\\PSoC5/Paso_erroneo.h"
+ 419              		.file 11 "Generated_Source\\PSoC5/CyLib.h"
+ 420              		.file 12 "Generated_Source\\PSoC5/Paso_actual.h"
+ 421              		.file 13 "Generated_Source\\PSoC5/Ultimo_Paso.h"
+ 422              		.file 14 "Generated_Source\\PSoC5/core_cm3.h"
+ 423              		.section	.debug_info,"",%progbits
+ 424              	.Ldebug_info0:
+ 425 0000 22050000 		.4byte	0x522
+ 426 0004 0400     		.2byte	0x4
+ 427 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 428 000a 04       		.byte	0x4
+ 429 000b 01       		.uleb128 0x1
+ 430 000c 7B000000 		.4byte	.LASF33
+ 431 0010 0C       		.byte	0xc
+ 432 0011 2E020000 		.4byte	.LASF34
+ 433 0015 4F010000 		.4byte	.LASF35
+ 434 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 435 001d 00000000 		.4byte	0
+ 436 0021 00000000 		.4byte	.Ldebug_line0
+ 437 0025 02       		.uleb128 0x2
+ 438 0026 01       		.byte	0x1
+ 439 0027 06       		.byte	0x6
+ 440 0028 61000000 		.4byte	.LASF0
+ 441 002c 02       		.uleb128 0x2
+ 442 002d 01       		.byte	0x1
+ 443 002e 08       		.byte	0x8
+ 444 002f 6D000000 		.4byte	.LASF1
+ 445 0033 02       		.uleb128 0x2
+ 446 0034 02       		.byte	0x2
+ 447 0035 05       		.byte	0x5
+ 448 0036 49020000 		.4byte	.LASF2
+ 449 003a 02       		.uleb128 0x2
+ 450 003b 02       		.byte	0x2
+ 451 003c 07       		.byte	0x7
+ 452 003d 23010000 		.4byte	.LASF3
+ 453 0041 03       		.uleb128 0x3
+ 454 0042 29000000 		.4byte	.LASF9
+ 455 0046 02       		.byte	0x2
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 11
+
+
+ 456 0047 3F       		.byte	0x3f
+ 457 0048 4C000000 		.4byte	0x4c
+ 458 004c 02       		.uleb128 0x2
+ 459 004d 04       		.byte	0x4
+ 460 004e 05       		.byte	0x5
+ 461 004f 53020000 		.4byte	.LASF4
+ 462 0053 02       		.uleb128 0x2
+ 463 0054 04       		.byte	0x4
+ 464 0055 07       		.byte	0x7
+ 465 0056 11010000 		.4byte	.LASF5
+ 466 005a 02       		.uleb128 0x2
+ 467 005b 08       		.byte	0x8
+ 468 005c 05       		.byte	0x5
+ 469 005d 00000000 		.4byte	.LASF6
+ 470 0061 02       		.uleb128 0x2
+ 471 0062 08       		.byte	0x8
+ 472 0063 07       		.byte	0x7
+ 473 0064 B4010000 		.4byte	.LASF7
+ 474 0068 04       		.uleb128 0x4
+ 475 0069 04       		.byte	0x4
+ 476 006a 05       		.byte	0x5
+ 477 006b 696E7400 		.ascii	"int\000"
+ 478 006f 02       		.uleb128 0x2
+ 479 0070 04       		.byte	0x4
+ 480 0071 07       		.byte	0x7
+ 481 0072 A7010000 		.4byte	.LASF8
+ 482 0076 03       		.uleb128 0x3
+ 483 0077 06020000 		.4byte	.LASF10
+ 484 007b 03       		.byte	0x3
+ 485 007c 2C       		.byte	0x2c
+ 486 007d 41000000 		.4byte	0x41
+ 487 0081 05       		.uleb128 0x5
+ 488 0082 A0010000 		.4byte	.LASF11
+ 489 0086 04       		.byte	0x4
+ 490 0087 E501     		.2byte	0x1e5
+ 491 0089 3A000000 		.4byte	0x3a
+ 492 008d 02       		.uleb128 0x2
+ 493 008e 04       		.byte	0x4
+ 494 008f 04       		.byte	0x4
+ 495 0090 44000000 		.4byte	.LASF12
+ 496 0094 02       		.uleb128 0x2
+ 497 0095 08       		.byte	0x8
+ 498 0096 04       		.byte	0x4
+ 499 0097 43010000 		.4byte	.LASF13
+ 500 009b 02       		.uleb128 0x2
+ 501 009c 01       		.byte	0x1
+ 502 009d 08       		.byte	0x8
+ 503 009e 35020000 		.4byte	.LASF14
+ 504 00a2 02       		.uleb128 0x2
+ 505 00a3 08       		.byte	0x8
+ 506 00a4 04       		.byte	0x4
+ 507 00a5 5C020000 		.4byte	.LASF15
+ 508 00a9 02       		.uleb128 0x2
+ 509 00aa 04       		.byte	0x4
+ 510 00ab 07       		.byte	0x7
+ 511 00ac 0E020000 		.4byte	.LASF16
+ 512 00b0 06       		.uleb128 0x6
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 12
+
+
+ 513 00b1 4A010000 		.4byte	.LASF36
+ 514 00b5 01       		.byte	0x1
+ 515 00b6 04       		.byte	0x4
+ 516 00b7 68000000 		.4byte	0x68
+ 517 00bb 00000000 		.4byte	.LFB63
+ 518 00bf 30020000 		.4byte	.LFE63-.LFB63
+ 519 00c3 01       		.uleb128 0x1
+ 520 00c4 9C       		.byte	0x9c
+ 521 00c5 75040000 		.4byte	0x475
+ 522 00c9 07       		.uleb128 0x7
+ 523 00ca 7A020000 		.4byte	.LASF17
+ 524 00ce 01       		.byte	0x1
+ 525 00cf 07       		.byte	0x7
+ 526 00d0 75040000 		.4byte	0x475
+ 527 00d4 02       		.uleb128 0x2
+ 528 00d5 91       		.byte	0x91
+ 529 00d6 50       		.sleb128 -48
+ 530 00d7 08       		.uleb128 0x8
+ 531 00d8 706F7300 		.ascii	"pos\000"
+ 532 00dc 01       		.byte	0x1
+ 533 00dd 08       		.byte	0x8
+ 534 00de 68000000 		.4byte	0x68
+ 535 00e2 00000000 		.4byte	.LLST0
+ 536 00e6 09       		.uleb128 0x9
+ 537 00e7 17020000 		.4byte	.LASF18
+ 538 00eb 01       		.byte	0x1
+ 539 00ec 09       		.byte	0x9
+ 540 00ed 68000000 		.4byte	0x68
+ 541 00f1 1F000000 		.4byte	.LLST1
+ 542 00f5 09       		.uleb128 0x9
+ 543 00f6 09010000 		.4byte	.LASF19
+ 544 00fa 01       		.byte	0x1
+ 545 00fb 0D       		.byte	0xd
+ 546 00fc 68000000 		.4byte	0x68
+ 547 0100 49000000 		.4byte	.LLST2
+ 548 0104 0A       		.uleb128 0xa
+ 549 0105 18000000 		.4byte	.LVL2
+ 550 0109 96040000 		.4byte	0x496
+ 551 010d 18010000 		.4byte	0x118
+ 552 0111 0B       		.uleb128 0xb
+ 553 0112 01       		.uleb128 0x1
+ 554 0113 50       		.byte	0x50
+ 555 0114 02       		.uleb128 0x2
+ 556 0115 74       		.byte	0x74
+ 557 0116 00       		.sleb128 0
+ 558 0117 00       		.byte	0
+ 559 0118 0C       		.uleb128 0xc
+ 560 0119 1C000000 		.4byte	.LVL3
+ 561 011d A1040000 		.4byte	0x4a1
+ 562 0121 0C       		.uleb128 0xc
+ 563 0122 20000000 		.4byte	.LVL4
+ 564 0126 AC040000 		.4byte	0x4ac
+ 565 012a 0C       		.uleb128 0xc
+ 566 012b 38000000 		.4byte	.LVL6
+ 567 012f AC040000 		.4byte	0x4ac
+ 568 0133 0C       		.uleb128 0xc
+ 569 0134 42000000 		.4byte	.LVL7
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 13
+
+
+ 570 0138 B7040000 		.4byte	0x4b7
+ 571 013c 0A       		.uleb128 0xa
+ 572 013d 9C000000 		.4byte	.LVL8
+ 573 0141 C2040000 		.4byte	0x4c2
+ 574 0145 4F010000 		.4byte	0x14f
+ 575 0149 0B       		.uleb128 0xb
+ 576 014a 01       		.uleb128 0x1
+ 577 014b 50       		.byte	0x50
+ 578 014c 01       		.uleb128 0x1
+ 579 014d 31       		.byte	0x31
+ 580 014e 00       		.byte	0
+ 581 014f 0A       		.uleb128 0xa
+ 582 0150 A2000000 		.4byte	.LVL9
+ 583 0154 C2040000 		.4byte	0x4c2
+ 584 0158 62010000 		.4byte	0x162
+ 585 015c 0B       		.uleb128 0xb
+ 586 015d 01       		.uleb128 0x1
+ 587 015e 50       		.byte	0x50
+ 588 015f 01       		.uleb128 0x1
+ 589 0160 30       		.byte	0x30
+ 590 0161 00       		.byte	0
+ 591 0162 0A       		.uleb128 0xa
+ 592 0163 BC000000 		.4byte	.LVL12
+ 593 0167 96040000 		.4byte	0x496
+ 594 016b 88010000 		.4byte	0x188
+ 595 016f 0B       		.uleb128 0xb
+ 596 0170 01       		.uleb128 0x1
+ 597 0171 50       		.byte	0x50
+ 598 0172 14       		.uleb128 0x14
+ 599 0173 91       		.byte	0x91
+ 600 0174 54       		.sleb128 -44
+ 601 0175 06       		.byte	0x6
+ 602 0176 31       		.byte	0x31
+ 603 0177 24       		.byte	0x24
+ 604 0178 91       		.byte	0x91
+ 605 0179 5C       		.sleb128 -36
+ 606 017a 06       		.byte	0x6
+ 607 017b 33       		.byte	0x33
+ 608 017c 24       		.byte	0x24
+ 609 017d 22       		.byte	0x22
+ 610 017e 91       		.byte	0x91
+ 611 017f 58       		.sleb128 -40
+ 612 0180 06       		.byte	0x6
+ 613 0181 32       		.byte	0x32
+ 614 0182 24       		.byte	0x24
+ 615 0183 22       		.byte	0x22
+ 616 0184 75       		.byte	0x75
+ 617 0185 00       		.sleb128 0
+ 618 0186 22       		.byte	0x22
+ 619 0187 00       		.byte	0
+ 620 0188 0C       		.uleb128 0xc
+ 621 0189 C6000000 		.4byte	.LVL15
+ 622 018d B7040000 		.4byte	0x4b7
+ 623 0191 0C       		.uleb128 0xc
+ 624 0192 CE000000 		.4byte	.LVL17
+ 625 0196 CD040000 		.4byte	0x4cd
+ 626 019a 0A       		.uleb128 0xa
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 14
+
+
+ 627 019b D6000000 		.4byte	.LVL20
+ 628 019f D8040000 		.4byte	0x4d8
+ 629 01a3 AD010000 		.4byte	0x1ad
+ 630 01a7 0B       		.uleb128 0xb
+ 631 01a8 01       		.uleb128 0x1
+ 632 01a9 50       		.byte	0x50
+ 633 01aa 01       		.uleb128 0x1
+ 634 01ab 31       		.byte	0x31
+ 635 01ac 00       		.byte	0
+ 636 01ad 0A       		.uleb128 0xa
+ 637 01ae DE000000 		.4byte	.LVL21
+ 638 01b2 E3040000 		.4byte	0x4e3
+ 639 01b6 C5010000 		.4byte	0x1c5
+ 640 01ba 0B       		.uleb128 0xb
+ 641 01bb 01       		.uleb128 0x1
+ 642 01bc 50       		.byte	0x50
+ 643 01bd 01       		.uleb128 0x1
+ 644 01be 30       		.byte	0x30
+ 645 01bf 0B       		.uleb128 0xb
+ 646 01c0 01       		.uleb128 0x1
+ 647 01c1 51       		.byte	0x51
+ 648 01c2 01       		.uleb128 0x1
+ 649 01c3 30       		.byte	0x30
+ 650 01c4 00       		.byte	0
+ 651 01c5 0A       		.uleb128 0xa
+ 652 01c6 E8000000 		.4byte	.LVL22
+ 653 01ca EE040000 		.4byte	0x4ee
+ 654 01ce DC010000 		.4byte	0x1dc
+ 655 01d2 0B       		.uleb128 0xb
+ 656 01d3 01       		.uleb128 0x1
+ 657 01d4 50       		.byte	0x50
+ 658 01d5 05       		.uleb128 0x5
+ 659 01d6 03       		.byte	0x3
+ 660 01d7 00000000 		.4byte	.LC0
+ 661 01db 00       		.byte	0
+ 662 01dc 0A       		.uleb128 0xa
+ 663 01dd F0000000 		.4byte	.LVL23
+ 664 01e1 E3040000 		.4byte	0x4e3
+ 665 01e5 F4010000 		.4byte	0x1f4
+ 666 01e9 0B       		.uleb128 0xb
+ 667 01ea 01       		.uleb128 0x1
+ 668 01eb 50       		.byte	0x50
+ 669 01ec 01       		.uleb128 0x1
+ 670 01ed 31       		.byte	0x31
+ 671 01ee 0B       		.uleb128 0xb
+ 672 01ef 01       		.uleb128 0x1
+ 673 01f0 51       		.byte	0x51
+ 674 01f1 01       		.uleb128 0x1
+ 675 01f2 30       		.byte	0x30
+ 676 01f3 00       		.byte	0
+ 677 01f4 0A       		.uleb128 0xa
+ 678 01f5 F6000000 		.4byte	.LVL24
+ 679 01f9 EE040000 		.4byte	0x4ee
+ 680 01fd 0B020000 		.4byte	0x20b
+ 681 0201 0B       		.uleb128 0xb
+ 682 0202 01       		.uleb128 0x1
+ 683 0203 50       		.byte	0x50
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 15
+
+
+ 684 0204 05       		.uleb128 0x5
+ 685 0205 03       		.byte	0x3
+ 686 0206 10000000 		.4byte	.LC1
+ 687 020a 00       		.byte	0
+ 688 020b 0A       		.uleb128 0xa
+ 689 020c FE000000 		.4byte	.LVL25
+ 690 0210 F9040000 		.4byte	0x4f9
+ 691 0214 20020000 		.4byte	0x220
+ 692 0218 0B       		.uleb128 0xb
+ 693 0219 01       		.uleb128 0x1
+ 694 021a 50       		.byte	0x50
+ 695 021b 03       		.uleb128 0x3
+ 696 021c 0A       		.byte	0xa
+ 697 021d 1027     		.2byte	0x2710
+ 698 021f 00       		.byte	0
+ 699 0220 0A       		.uleb128 0xa
+ 700 0221 0A010000 		.4byte	.LVL26
+ 701 0225 EE040000 		.4byte	0x4ee
+ 702 0229 37020000 		.4byte	0x237
+ 703 022d 0B       		.uleb128 0xb
+ 704 022e 01       		.uleb128 0x1
+ 705 022f 50       		.byte	0x50
+ 706 0230 05       		.uleb128 0x5
+ 707 0231 03       		.byte	0x3
+ 708 0232 20000000 		.4byte	.LC2
+ 709 0236 00       		.byte	0
+ 710 0237 0A       		.uleb128 0xa
+ 711 0238 12010000 		.4byte	.LVL27
+ 712 023c E3040000 		.4byte	0x4e3
+ 713 0240 4F020000 		.4byte	0x24f
+ 714 0244 0B       		.uleb128 0xb
+ 715 0245 01       		.uleb128 0x1
+ 716 0246 50       		.byte	0x50
+ 717 0247 01       		.uleb128 0x1
+ 718 0248 31       		.byte	0x31
+ 719 0249 0B       		.uleb128 0xb
+ 720 024a 01       		.uleb128 0x1
+ 721 024b 51       		.byte	0x51
+ 722 024c 01       		.uleb128 0x1
+ 723 024d 30       		.byte	0x30
+ 724 024e 00       		.byte	0
+ 725 024f 0A       		.uleb128 0xa
+ 726 0250 18010000 		.4byte	.LVL28
+ 727 0254 EE040000 		.4byte	0x4ee
+ 728 0258 66020000 		.4byte	0x266
+ 729 025c 0B       		.uleb128 0xb
+ 730 025d 01       		.uleb128 0x1
+ 731 025e 50       		.byte	0x50
+ 732 025f 05       		.uleb128 0x5
+ 733 0260 03       		.byte	0x3
+ 734 0261 34000000 		.4byte	.LC3
+ 735 0265 00       		.byte	0
+ 736 0266 0A       		.uleb128 0xa
+ 737 0267 20010000 		.4byte	.LVL29
+ 738 026b F9040000 		.4byte	0x4f9
+ 739 026f 7B020000 		.4byte	0x27b
+ 740 0273 0B       		.uleb128 0xb
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 16
+
+
+ 741 0274 01       		.uleb128 0x1
+ 742 0275 50       		.byte	0x50
+ 743 0276 03       		.uleb128 0x3
+ 744 0277 0A       		.byte	0xa
+ 745 0278 1027     		.2byte	0x2710
+ 746 027a 00       		.byte	0
+ 747 027b 0C       		.uleb128 0xc
+ 748 027c 26010000 		.4byte	.LVL30
+ 749 0280 04050000 		.4byte	0x504
+ 750 0284 0C       		.uleb128 0xc
+ 751 0285 2C010000 		.4byte	.LVL32
+ 752 0289 0F050000 		.4byte	0x50f
+ 753 028d 0C       		.uleb128 0xc
+ 754 028e 36010000 		.4byte	.LVL33
+ 755 0292 04050000 		.4byte	0x504
+ 756 0296 0C       		.uleb128 0xc
+ 757 0297 3C010000 		.4byte	.LVL34
+ 758 029b 0F050000 		.4byte	0x50f
+ 759 029f 0A       		.uleb128 0xa
+ 760 02a0 46010000 		.4byte	.LVL35
+ 761 02a4 EE040000 		.4byte	0x4ee
+ 762 02a8 B6020000 		.4byte	0x2b6
+ 763 02ac 0B       		.uleb128 0xb
+ 764 02ad 01       		.uleb128 0x1
+ 765 02ae 50       		.byte	0x50
+ 766 02af 05       		.uleb128 0x5
+ 767 02b0 03       		.byte	0x3
+ 768 02b1 48000000 		.4byte	.LC4
+ 769 02b5 00       		.byte	0
+ 770 02b6 0A       		.uleb128 0xa
+ 771 02b7 4E010000 		.4byte	.LVL36
+ 772 02bb F9040000 		.4byte	0x4f9
+ 773 02bf CB020000 		.4byte	0x2cb
+ 774 02c3 0B       		.uleb128 0xb
+ 775 02c4 01       		.uleb128 0x1
+ 776 02c5 50       		.byte	0x50
+ 777 02c6 03       		.uleb128 0x3
+ 778 02c7 0A       		.byte	0xa
+ 779 02c8 8813     		.2byte	0x1388
+ 780 02ca 00       		.byte	0
+ 781 02cb 0C       		.uleb128 0xc
+ 782 02cc 54010000 		.4byte	.LVL37
+ 783 02d0 04050000 		.4byte	0x504
+ 784 02d4 0A       		.uleb128 0xa
+ 785 02d5 5E010000 		.4byte	.LVL38
+ 786 02d9 EE040000 		.4byte	0x4ee
+ 787 02dd EB020000 		.4byte	0x2eb
+ 788 02e1 0B       		.uleb128 0xb
+ 789 02e2 01       		.uleb128 0x1
+ 790 02e3 50       		.byte	0x50
+ 791 02e4 05       		.uleb128 0x5
+ 792 02e5 03       		.byte	0x3
+ 793 02e6 58000000 		.4byte	.LC5
+ 794 02ea 00       		.byte	0
+ 795 02eb 0A       		.uleb128 0xa
+ 796 02ec 6A010000 		.4byte	.LVL39
+ 797 02f0 EE040000 		.4byte	0x4ee
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 17
+
+
+ 798 02f4 FF020000 		.4byte	0x2ff
+ 799 02f8 0B       		.uleb128 0xb
+ 800 02f9 01       		.uleb128 0x1
+ 801 02fa 50       		.byte	0x50
+ 802 02fb 02       		.uleb128 0x2
+ 803 02fc 7A       		.byte	0x7a
+ 804 02fd 00       		.sleb128 0
+ 805 02fe 00       		.byte	0
+ 806 02ff 0A       		.uleb128 0xa
+ 807 0300 78010000 		.4byte	.LVL40
+ 808 0304 1A050000 		.4byte	0x51a
+ 809 0308 19030000 		.4byte	0x319
+ 810 030c 0B       		.uleb128 0xb
+ 811 030d 01       		.uleb128 0x1
+ 812 030e 50       		.byte	0x50
+ 813 030f 08       		.uleb128 0x8
+ 814 0310 31       		.byte	0x31
+ 815 0311 79       		.byte	0x79
+ 816 0312 00       		.sleb128 0
+ 817 0313 1C       		.byte	0x1c
+ 818 0314 0A       		.byte	0xa
+ 819 0315 FFFF     		.2byte	0xffff
+ 820 0317 1A       		.byte	0x1a
+ 821 0318 00       		.byte	0
+ 822 0319 0A       		.uleb128 0xa
+ 823 031a 82010000 		.4byte	.LVL41
+ 824 031e EE040000 		.4byte	0x4ee
+ 825 0322 2D030000 		.4byte	0x32d
+ 826 0326 0B       		.uleb128 0xb
+ 827 0327 01       		.uleb128 0x1
+ 828 0328 50       		.byte	0x50
+ 829 0329 02       		.uleb128 0x2
+ 830 032a 78       		.byte	0x78
+ 831 032b 00       		.sleb128 0
+ 832 032c 00       		.byte	0
+ 833 032d 0A       		.uleb128 0xa
+ 834 032e 8E010000 		.4byte	.LVL42
+ 835 0332 1A050000 		.4byte	0x51a
+ 836 0336 47030000 		.4byte	0x347
+ 837 033a 0B       		.uleb128 0xb
+ 838 033b 01       		.uleb128 0x1
+ 839 033c 50       		.byte	0x50
+ 840 033d 08       		.uleb128 0x8
+ 841 033e 31       		.byte	0x31
+ 842 033f 77       		.byte	0x77
+ 843 0340 00       		.sleb128 0
+ 844 0341 1C       		.byte	0x1c
+ 845 0342 0A       		.byte	0xa
+ 846 0343 FFFF     		.2byte	0xffff
+ 847 0345 1A       		.byte	0x1a
+ 848 0346 00       		.byte	0
+ 849 0347 0A       		.uleb128 0xa
+ 850 0348 96010000 		.4byte	.LVL43
+ 851 034c EE040000 		.4byte	0x4ee
+ 852 0350 5B030000 		.4byte	0x35b
+ 853 0354 0B       		.uleb128 0xb
+ 854 0355 01       		.uleb128 0x1
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 18
+
+
+ 855 0356 50       		.byte	0x50
+ 856 0357 02       		.uleb128 0x2
+ 857 0358 76       		.byte	0x76
+ 858 0359 00       		.sleb128 0
+ 859 035a 00       		.byte	0
+ 860 035b 0A       		.uleb128 0xa
+ 861 035c A2010000 		.4byte	.LVL44
+ 862 0360 1A050000 		.4byte	0x51a
+ 863 0364 75030000 		.4byte	0x375
+ 864 0368 0B       		.uleb128 0xb
+ 865 0369 01       		.uleb128 0x1
+ 866 036a 50       		.byte	0x50
+ 867 036b 08       		.uleb128 0x8
+ 868 036c 31       		.byte	0x31
+ 869 036d 75       		.byte	0x75
+ 870 036e 00       		.sleb128 0
+ 871 036f 1C       		.byte	0x1c
+ 872 0370 0A       		.byte	0xa
+ 873 0371 FFFF     		.2byte	0xffff
+ 874 0373 1A       		.byte	0x1a
+ 875 0374 00       		.byte	0
+ 876 0375 0A       		.uleb128 0xa
+ 877 0376 AA010000 		.4byte	.LVL45
+ 878 037a E3040000 		.4byte	0x4e3
+ 879 037e 8D030000 		.4byte	0x38d
+ 880 0382 0B       		.uleb128 0xb
+ 881 0383 01       		.uleb128 0x1
+ 882 0384 50       		.byte	0x50
+ 883 0385 01       		.uleb128 0x1
+ 884 0386 31       		.byte	0x31
+ 885 0387 0B       		.uleb128 0xb
+ 886 0388 01       		.uleb128 0x1
+ 887 0389 51       		.byte	0x51
+ 888 038a 01       		.uleb128 0x1
+ 889 038b 30       		.byte	0x30
+ 890 038c 00       		.byte	0
+ 891 038d 0A       		.uleb128 0xa
+ 892 038e B0010000 		.4byte	.LVL46
+ 893 0392 EE040000 		.4byte	0x4ee
+ 894 0396 A1030000 		.4byte	0x3a1
+ 895 039a 0B       		.uleb128 0xb
+ 896 039b 01       		.uleb128 0x1
+ 897 039c 50       		.byte	0x50
+ 898 039d 02       		.uleb128 0x2
+ 899 039e 7A       		.byte	0x7a
+ 900 039f 00       		.sleb128 0
+ 901 03a0 00       		.byte	0
+ 902 03a1 0A       		.uleb128 0xa
+ 903 03a2 B8010000 		.4byte	.LVL47
+ 904 03a6 1A050000 		.4byte	0x51a
+ 905 03aa B9030000 		.4byte	0x3b9
+ 906 03ae 0B       		.uleb128 0xb
+ 907 03af 01       		.uleb128 0x1
+ 908 03b0 50       		.byte	0x50
+ 909 03b1 06       		.uleb128 0x6
+ 910 03b2 79       		.byte	0x79
+ 911 03b3 00       		.sleb128 0
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 19
+
+
+ 912 03b4 0A       		.byte	0xa
+ 913 03b5 FFFF     		.2byte	0xffff
+ 914 03b7 1A       		.byte	0x1a
+ 915 03b8 00       		.byte	0
+ 916 03b9 0A       		.uleb128 0xa
+ 917 03ba BE010000 		.4byte	.LVL48
+ 918 03be EE040000 		.4byte	0x4ee
+ 919 03c2 CD030000 		.4byte	0x3cd
+ 920 03c6 0B       		.uleb128 0xb
+ 921 03c7 01       		.uleb128 0x1
+ 922 03c8 50       		.byte	0x50
+ 923 03c9 02       		.uleb128 0x2
+ 924 03ca 78       		.byte	0x78
+ 925 03cb 00       		.sleb128 0
+ 926 03cc 00       		.byte	0
+ 927 03cd 0A       		.uleb128 0xa
+ 928 03ce C4010000 		.4byte	.LVL49
+ 929 03d2 1A050000 		.4byte	0x51a
+ 930 03d6 E5030000 		.4byte	0x3e5
+ 931 03da 0B       		.uleb128 0xb
+ 932 03db 01       		.uleb128 0x1
+ 933 03dc 50       		.byte	0x50
+ 934 03dd 06       		.uleb128 0x6
+ 935 03de 77       		.byte	0x77
+ 936 03df 00       		.sleb128 0
+ 937 03e0 0A       		.byte	0xa
+ 938 03e1 FFFF     		.2byte	0xffff
+ 939 03e3 1A       		.byte	0x1a
+ 940 03e4 00       		.byte	0
+ 941 03e5 0A       		.uleb128 0xa
+ 942 03e6 CA010000 		.4byte	.LVL50
+ 943 03ea EE040000 		.4byte	0x4ee
+ 944 03ee F9030000 		.4byte	0x3f9
+ 945 03f2 0B       		.uleb128 0xb
+ 946 03f3 01       		.uleb128 0x1
+ 947 03f4 50       		.byte	0x50
+ 948 03f5 02       		.uleb128 0x2
+ 949 03f6 76       		.byte	0x76
+ 950 03f7 00       		.sleb128 0
+ 951 03f8 00       		.byte	0
+ 952 03f9 0A       		.uleb128 0xa
+ 953 03fa D0010000 		.4byte	.LVL51
+ 954 03fe 1A050000 		.4byte	0x51a
+ 955 0402 11040000 		.4byte	0x411
+ 956 0406 0B       		.uleb128 0xb
+ 957 0407 01       		.uleb128 0x1
+ 958 0408 50       		.byte	0x50
+ 959 0409 06       		.uleb128 0x6
+ 960 040a 75       		.byte	0x75
+ 961 040b 00       		.sleb128 0
+ 962 040c 0A       		.byte	0xa
+ 963 040d FFFF     		.2byte	0xffff
+ 964 040f 1A       		.byte	0x1a
+ 965 0410 00       		.byte	0
+ 966 0411 0A       		.uleb128 0xa
+ 967 0412 E4010000 		.4byte	.LVL52
+ 968 0416 E3040000 		.4byte	0x4e3
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 20
+
+
+ 969 041a 2F040000 		.4byte	0x42f
+ 970 041e 0B       		.uleb128 0xb
+ 971 041f 01       		.uleb128 0x1
+ 972 0420 50       		.byte	0x50
+ 973 0421 01       		.uleb128 0x1
+ 974 0422 30       		.byte	0x30
+ 975 0423 0B       		.uleb128 0xb
+ 976 0424 01       		.uleb128 0x1
+ 977 0425 51       		.byte	0x51
+ 978 0426 07       		.uleb128 0x7
+ 979 0427 74       		.byte	0x74
+ 980 0428 00       		.sleb128 0
+ 981 0429 32       		.byte	0x32
+ 982 042a 24       		.byte	0x24
+ 983 042b 08       		.byte	0x8
+ 984 042c FC       		.byte	0xfc
+ 985 042d 1A       		.byte	0x1a
+ 986 042e 00       		.byte	0
+ 987 042f 0A       		.uleb128 0xa
+ 988 0430 F2010000 		.4byte	.LVL53
+ 989 0434 E3040000 		.4byte	0x4e3
+ 990 0438 4D040000 		.4byte	0x44d
+ 991 043c 0B       		.uleb128 0xb
+ 992 043d 01       		.uleb128 0x1
+ 993 043e 50       		.byte	0x50
+ 994 043f 01       		.uleb128 0x1
+ 995 0440 31       		.byte	0x31
+ 996 0441 0B       		.uleb128 0xb
+ 997 0442 01       		.uleb128 0x1
+ 998 0443 51       		.byte	0x51
+ 999 0444 07       		.uleb128 0x7
+ 1000 0445 74       		.byte	0x74
+ 1001 0446 00       		.sleb128 0
+ 1002 0447 32       		.byte	0x32
+ 1003 0448 24       		.byte	0x24
+ 1004 0449 08       		.byte	0x8
+ 1005 044a FC       		.byte	0xfc
+ 1006 044b 1A       		.byte	0x1a
+ 1007 044c 00       		.byte	0
+ 1008 044d 0A       		.uleb128 0xa
+ 1009 044e F8010000 		.4byte	.LVL54
+ 1010 0452 EE040000 		.4byte	0x4ee
+ 1011 0456 64040000 		.4byte	0x464
+ 1012 045a 0B       		.uleb128 0xb
+ 1013 045b 01       		.uleb128 0x1
+ 1014 045c 50       		.byte	0x50
+ 1015 045d 05       		.uleb128 0x5
+ 1016 045e 03       		.byte	0x3
+ 1017 045f 78000000 		.4byte	.LC9
+ 1018 0463 00       		.byte	0
+ 1019 0464 0D       		.uleb128 0xd
+ 1020 0465 FE010000 		.4byte	.LVL55
+ 1021 0469 F9040000 		.4byte	0x4f9
+ 1022 046d 0B       		.uleb128 0xb
+ 1023 046e 01       		.uleb128 0x1
+ 1024 046f 50       		.byte	0x50
+ 1025 0470 02       		.uleb128 0x2
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 21
+
+
+ 1026 0471 08       		.byte	0x8
+ 1027 0472 64       		.byte	0x64
+ 1028 0473 00       		.byte	0
+ 1029 0474 00       		.byte	0
+ 1030 0475 0E       		.uleb128 0xe
+ 1031 0476 68000000 		.4byte	0x68
+ 1032 047a 85040000 		.4byte	0x485
+ 1033 047e 0F       		.uleb128 0xf
+ 1034 047f A9000000 		.4byte	0xa9
+ 1035 0483 03       		.byte	0x3
+ 1036 0484 00       		.byte	0
+ 1037 0485 10       		.uleb128 0x10
+ 1038 0486 36010000 		.4byte	.LASF37
+ 1039 048a 0E       		.byte	0xe
+ 1040 048b 1207     		.2byte	0x712
+ 1041 048d 91040000 		.4byte	0x491
+ 1042 0491 11       		.uleb128 0x11
+ 1043 0492 76000000 		.4byte	0x76
+ 1044 0496 12       		.uleb128 0x12
+ 1045 0497 3A020000 		.4byte	.LASF20
+ 1046 049b 3A020000 		.4byte	.LASF20
+ 1047 049f 05       		.byte	0x5
+ 1048 04a0 2F       		.byte	0x2f
+ 1049 04a1 12       		.uleb128 0x12
+ 1050 04a2 1F000000 		.4byte	.LASF21
+ 1051 04a6 1F000000 		.4byte	.LASF21
+ 1052 04aa 06       		.byte	0x6
+ 1053 04ab 38       		.byte	0x38
+ 1054 04ac 12       		.uleb128 0x12
+ 1055 04ad F7010000 		.4byte	.LASF22
+ 1056 04b1 F7010000 		.4byte	.LASF22
+ 1057 04b5 07       		.byte	0x7
+ 1058 04b6 29       		.byte	0x29
+ 1059 04b7 12       		.uleb128 0x12
+ 1060 04b8 EB010000 		.4byte	.LASF23
+ 1061 04bc EB010000 		.4byte	.LASF23
+ 1062 04c0 08       		.byte	0x8
+ 1063 04c1 29       		.byte	0x29
+ 1064 04c2 12       		.uleb128 0x12
+ 1065 04c3 4A000000 		.4byte	.LASF24
+ 1066 04c7 4A000000 		.4byte	.LASF24
+ 1067 04cb 09       		.byte	0x9
+ 1068 04cc 2F       		.byte	0x2f
+ 1069 04cd 12       		.uleb128 0x12
+ 1070 04ce 68020000 		.4byte	.LASF25
+ 1071 04d2 68020000 		.4byte	.LASF25
+ 1072 04d6 0A       		.byte	0xa
+ 1073 04d7 30       		.byte	0x30
+ 1074 04d8 12       		.uleb128 0x12
+ 1075 04d9 0E000000 		.4byte	.LASF26
+ 1076 04dd 0E000000 		.4byte	.LASF26
+ 1077 04e1 06       		.byte	0x6
+ 1078 04e2 3A       		.byte	0x3a
+ 1079 04e3 12       		.uleb128 0x12
+ 1080 04e4 CB010000 		.4byte	.LASF27
+ 1081 04e8 CB010000 		.4byte	.LASF27
+ 1082 04ec 06       		.byte	0x6
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 22
+
+
+ 1083 04ed 3D       		.byte	0x3d
+ 1084 04ee 12       		.uleb128 0x12
+ 1085 04ef 90010000 		.4byte	.LASF28
+ 1086 04f3 90010000 		.4byte	.LASF28
+ 1087 04f7 06       		.byte	0x6
+ 1088 04f8 3C       		.byte	0x3c
+ 1089 04f9 12       		.uleb128 0x12
+ 1090 04fa 81020000 		.4byte	.LASF29
+ 1091 04fe 81020000 		.4byte	.LASF29
+ 1092 0502 0B       		.byte	0xb
+ 1093 0503 76       		.byte	0x76
+ 1094 0504 12       		.uleb128 0x12
+ 1095 0505 1D020000 		.4byte	.LASF30
+ 1096 0509 1D020000 		.4byte	.LASF30
+ 1097 050d 0C       		.byte	0xc
+ 1098 050e 30       		.byte	0x30
+ 1099 050f 12       		.uleb128 0x12
+ 1100 0510 33000000 		.4byte	.LASF31
+ 1101 0514 33000000 		.4byte	.LASF31
+ 1102 0518 0D       		.byte	0xd
+ 1103 0519 30       		.byte	0x30
+ 1104 051a 12       		.uleb128 0x12
+ 1105 051b D8010000 		.4byte	.LASF32
+ 1106 051f D8010000 		.4byte	.LASF32
+ 1107 0523 06       		.byte	0x6
+ 1108 0524 61       		.byte	0x61
+ 1109 0525 00       		.byte	0
+ 1110              		.section	.debug_abbrev,"",%progbits
+ 1111              	.Ldebug_abbrev0:
+ 1112 0000 01       		.uleb128 0x1
+ 1113 0001 11       		.uleb128 0x11
+ 1114 0002 01       		.byte	0x1
+ 1115 0003 25       		.uleb128 0x25
+ 1116 0004 0E       		.uleb128 0xe
+ 1117 0005 13       		.uleb128 0x13
+ 1118 0006 0B       		.uleb128 0xb
+ 1119 0007 03       		.uleb128 0x3
+ 1120 0008 0E       		.uleb128 0xe
+ 1121 0009 1B       		.uleb128 0x1b
+ 1122 000a 0E       		.uleb128 0xe
+ 1123 000b 55       		.uleb128 0x55
+ 1124 000c 17       		.uleb128 0x17
+ 1125 000d 11       		.uleb128 0x11
+ 1126 000e 01       		.uleb128 0x1
+ 1127 000f 10       		.uleb128 0x10
+ 1128 0010 17       		.uleb128 0x17
+ 1129 0011 00       		.byte	0
+ 1130 0012 00       		.byte	0
+ 1131 0013 02       		.uleb128 0x2
+ 1132 0014 24       		.uleb128 0x24
+ 1133 0015 00       		.byte	0
+ 1134 0016 0B       		.uleb128 0xb
+ 1135 0017 0B       		.uleb128 0xb
+ 1136 0018 3E       		.uleb128 0x3e
+ 1137 0019 0B       		.uleb128 0xb
+ 1138 001a 03       		.uleb128 0x3
+ 1139 001b 0E       		.uleb128 0xe
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 23
+
+
+ 1140 001c 00       		.byte	0
+ 1141 001d 00       		.byte	0
+ 1142 001e 03       		.uleb128 0x3
+ 1143 001f 16       		.uleb128 0x16
+ 1144 0020 00       		.byte	0
+ 1145 0021 03       		.uleb128 0x3
+ 1146 0022 0E       		.uleb128 0xe
+ 1147 0023 3A       		.uleb128 0x3a
+ 1148 0024 0B       		.uleb128 0xb
+ 1149 0025 3B       		.uleb128 0x3b
+ 1150 0026 0B       		.uleb128 0xb
+ 1151 0027 49       		.uleb128 0x49
+ 1152 0028 13       		.uleb128 0x13
+ 1153 0029 00       		.byte	0
+ 1154 002a 00       		.byte	0
+ 1155 002b 04       		.uleb128 0x4
+ 1156 002c 24       		.uleb128 0x24
+ 1157 002d 00       		.byte	0
+ 1158 002e 0B       		.uleb128 0xb
+ 1159 002f 0B       		.uleb128 0xb
+ 1160 0030 3E       		.uleb128 0x3e
+ 1161 0031 0B       		.uleb128 0xb
+ 1162 0032 03       		.uleb128 0x3
+ 1163 0033 08       		.uleb128 0x8
+ 1164 0034 00       		.byte	0
+ 1165 0035 00       		.byte	0
+ 1166 0036 05       		.uleb128 0x5
+ 1167 0037 16       		.uleb128 0x16
+ 1168 0038 00       		.byte	0
+ 1169 0039 03       		.uleb128 0x3
+ 1170 003a 0E       		.uleb128 0xe
+ 1171 003b 3A       		.uleb128 0x3a
+ 1172 003c 0B       		.uleb128 0xb
+ 1173 003d 3B       		.uleb128 0x3b
+ 1174 003e 05       		.uleb128 0x5
+ 1175 003f 49       		.uleb128 0x49
+ 1176 0040 13       		.uleb128 0x13
+ 1177 0041 00       		.byte	0
+ 1178 0042 00       		.byte	0
+ 1179 0043 06       		.uleb128 0x6
+ 1180 0044 2E       		.uleb128 0x2e
+ 1181 0045 01       		.byte	0x1
+ 1182 0046 3F       		.uleb128 0x3f
+ 1183 0047 19       		.uleb128 0x19
+ 1184 0048 03       		.uleb128 0x3
+ 1185 0049 0E       		.uleb128 0xe
+ 1186 004a 3A       		.uleb128 0x3a
+ 1187 004b 0B       		.uleb128 0xb
+ 1188 004c 3B       		.uleb128 0x3b
+ 1189 004d 0B       		.uleb128 0xb
+ 1190 004e 49       		.uleb128 0x49
+ 1191 004f 13       		.uleb128 0x13
+ 1192 0050 8701     		.uleb128 0x87
+ 1193 0052 19       		.uleb128 0x19
+ 1194 0053 11       		.uleb128 0x11
+ 1195 0054 01       		.uleb128 0x1
+ 1196 0055 12       		.uleb128 0x12
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 24
+
+
+ 1197 0056 06       		.uleb128 0x6
+ 1198 0057 40       		.uleb128 0x40
+ 1199 0058 18       		.uleb128 0x18
+ 1200 0059 9742     		.uleb128 0x2117
+ 1201 005b 19       		.uleb128 0x19
+ 1202 005c 01       		.uleb128 0x1
+ 1203 005d 13       		.uleb128 0x13
+ 1204 005e 00       		.byte	0
+ 1205 005f 00       		.byte	0
+ 1206 0060 07       		.uleb128 0x7
+ 1207 0061 34       		.uleb128 0x34
+ 1208 0062 00       		.byte	0
+ 1209 0063 03       		.uleb128 0x3
+ 1210 0064 0E       		.uleb128 0xe
+ 1211 0065 3A       		.uleb128 0x3a
+ 1212 0066 0B       		.uleb128 0xb
+ 1213 0067 3B       		.uleb128 0x3b
+ 1214 0068 0B       		.uleb128 0xb
+ 1215 0069 49       		.uleb128 0x49
+ 1216 006a 13       		.uleb128 0x13
+ 1217 006b 02       		.uleb128 0x2
+ 1218 006c 18       		.uleb128 0x18
+ 1219 006d 00       		.byte	0
+ 1220 006e 00       		.byte	0
+ 1221 006f 08       		.uleb128 0x8
+ 1222 0070 34       		.uleb128 0x34
+ 1223 0071 00       		.byte	0
+ 1224 0072 03       		.uleb128 0x3
+ 1225 0073 08       		.uleb128 0x8
+ 1226 0074 3A       		.uleb128 0x3a
+ 1227 0075 0B       		.uleb128 0xb
+ 1228 0076 3B       		.uleb128 0x3b
+ 1229 0077 0B       		.uleb128 0xb
+ 1230 0078 49       		.uleb128 0x49
+ 1231 0079 13       		.uleb128 0x13
+ 1232 007a 02       		.uleb128 0x2
+ 1233 007b 17       		.uleb128 0x17
+ 1234 007c 00       		.byte	0
+ 1235 007d 00       		.byte	0
+ 1236 007e 09       		.uleb128 0x9
+ 1237 007f 34       		.uleb128 0x34
+ 1238 0080 00       		.byte	0
+ 1239 0081 03       		.uleb128 0x3
+ 1240 0082 0E       		.uleb128 0xe
+ 1241 0083 3A       		.uleb128 0x3a
+ 1242 0084 0B       		.uleb128 0xb
+ 1243 0085 3B       		.uleb128 0x3b
+ 1244 0086 0B       		.uleb128 0xb
+ 1245 0087 49       		.uleb128 0x49
+ 1246 0088 13       		.uleb128 0x13
+ 1247 0089 02       		.uleb128 0x2
+ 1248 008a 17       		.uleb128 0x17
+ 1249 008b 00       		.byte	0
+ 1250 008c 00       		.byte	0
+ 1251 008d 0A       		.uleb128 0xa
+ 1252 008e 898201   		.uleb128 0x4109
+ 1253 0091 01       		.byte	0x1
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 25
+
+
+ 1254 0092 11       		.uleb128 0x11
+ 1255 0093 01       		.uleb128 0x1
+ 1256 0094 31       		.uleb128 0x31
+ 1257 0095 13       		.uleb128 0x13
+ 1258 0096 01       		.uleb128 0x1
+ 1259 0097 13       		.uleb128 0x13
+ 1260 0098 00       		.byte	0
+ 1261 0099 00       		.byte	0
+ 1262 009a 0B       		.uleb128 0xb
+ 1263 009b 8A8201   		.uleb128 0x410a
+ 1264 009e 00       		.byte	0
+ 1265 009f 02       		.uleb128 0x2
+ 1266 00a0 18       		.uleb128 0x18
+ 1267 00a1 9142     		.uleb128 0x2111
+ 1268 00a3 18       		.uleb128 0x18
+ 1269 00a4 00       		.byte	0
+ 1270 00a5 00       		.byte	0
+ 1271 00a6 0C       		.uleb128 0xc
+ 1272 00a7 898201   		.uleb128 0x4109
+ 1273 00aa 00       		.byte	0
+ 1274 00ab 11       		.uleb128 0x11
+ 1275 00ac 01       		.uleb128 0x1
+ 1276 00ad 31       		.uleb128 0x31
+ 1277 00ae 13       		.uleb128 0x13
+ 1278 00af 00       		.byte	0
+ 1279 00b0 00       		.byte	0
+ 1280 00b1 0D       		.uleb128 0xd
+ 1281 00b2 898201   		.uleb128 0x4109
+ 1282 00b5 01       		.byte	0x1
+ 1283 00b6 11       		.uleb128 0x11
+ 1284 00b7 01       		.uleb128 0x1
+ 1285 00b8 31       		.uleb128 0x31
+ 1286 00b9 13       		.uleb128 0x13
+ 1287 00ba 00       		.byte	0
+ 1288 00bb 00       		.byte	0
+ 1289 00bc 0E       		.uleb128 0xe
+ 1290 00bd 01       		.uleb128 0x1
+ 1291 00be 01       		.byte	0x1
+ 1292 00bf 49       		.uleb128 0x49
+ 1293 00c0 13       		.uleb128 0x13
+ 1294 00c1 01       		.uleb128 0x1
+ 1295 00c2 13       		.uleb128 0x13
+ 1296 00c3 00       		.byte	0
+ 1297 00c4 00       		.byte	0
+ 1298 00c5 0F       		.uleb128 0xf
+ 1299 00c6 21       		.uleb128 0x21
+ 1300 00c7 00       		.byte	0
+ 1301 00c8 49       		.uleb128 0x49
+ 1302 00c9 13       		.uleb128 0x13
+ 1303 00ca 2F       		.uleb128 0x2f
+ 1304 00cb 0B       		.uleb128 0xb
+ 1305 00cc 00       		.byte	0
+ 1306 00cd 00       		.byte	0
+ 1307 00ce 10       		.uleb128 0x10
+ 1308 00cf 34       		.uleb128 0x34
+ 1309 00d0 00       		.byte	0
+ 1310 00d1 03       		.uleb128 0x3
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 26
+
+
+ 1311 00d2 0E       		.uleb128 0xe
+ 1312 00d3 3A       		.uleb128 0x3a
+ 1313 00d4 0B       		.uleb128 0xb
+ 1314 00d5 3B       		.uleb128 0x3b
+ 1315 00d6 05       		.uleb128 0x5
+ 1316 00d7 49       		.uleb128 0x49
+ 1317 00d8 13       		.uleb128 0x13
+ 1318 00d9 3F       		.uleb128 0x3f
+ 1319 00da 19       		.uleb128 0x19
+ 1320 00db 3C       		.uleb128 0x3c
+ 1321 00dc 19       		.uleb128 0x19
+ 1322 00dd 00       		.byte	0
+ 1323 00de 00       		.byte	0
+ 1324 00df 11       		.uleb128 0x11
+ 1325 00e0 35       		.uleb128 0x35
+ 1326 00e1 00       		.byte	0
+ 1327 00e2 49       		.uleb128 0x49
+ 1328 00e3 13       		.uleb128 0x13
+ 1329 00e4 00       		.byte	0
+ 1330 00e5 00       		.byte	0
+ 1331 00e6 12       		.uleb128 0x12
+ 1332 00e7 2E       		.uleb128 0x2e
+ 1333 00e8 00       		.byte	0
+ 1334 00e9 3F       		.uleb128 0x3f
+ 1335 00ea 19       		.uleb128 0x19
+ 1336 00eb 3C       		.uleb128 0x3c
+ 1337 00ec 19       		.uleb128 0x19
+ 1338 00ed 6E       		.uleb128 0x6e
+ 1339 00ee 0E       		.uleb128 0xe
+ 1340 00ef 03       		.uleb128 0x3
+ 1341 00f0 0E       		.uleb128 0xe
+ 1342 00f1 3A       		.uleb128 0x3a
+ 1343 00f2 0B       		.uleb128 0xb
+ 1344 00f3 3B       		.uleb128 0x3b
+ 1345 00f4 0B       		.uleb128 0xb
+ 1346 00f5 00       		.byte	0
+ 1347 00f6 00       		.byte	0
+ 1348 00f7 00       		.byte	0
+ 1349              		.section	.debug_loc,"",%progbits
+ 1350              	.Ldebug_loc0:
+ 1351              	.LLST0:
+ 1352 0000 10000000 		.4byte	.LVL0
+ 1353 0004 1C000000 		.4byte	.LVL3
+ 1354 0008 0200     		.2byte	0x2
+ 1355 000a 30       		.byte	0x30
+ 1356 000b 9F       		.byte	0x9f
+ 1357 000c 1C000000 		.4byte	.LVL3
+ 1358 0010 30020000 		.4byte	.LFE63
+ 1359 0014 0100     		.2byte	0x1
+ 1360 0016 54       		.byte	0x54
+ 1361 0017 00000000 		.4byte	0
+ 1362 001b 00000000 		.4byte	0
+ 1363              	.LLST1:
+ 1364 001f 10000000 		.4byte	.LVL0
+ 1365 0023 1C000000 		.4byte	.LVL3
+ 1366 0027 0200     		.2byte	0x2
+ 1367 0029 30       		.byte	0x30
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 27
+
+
+ 1368 002a 9F       		.byte	0x9f
+ 1369 002b D0000000 		.4byte	.LVL18
+ 1370 002f D2000000 		.4byte	.LVL19
+ 1371 0033 0100     		.2byte	0x1
+ 1372 0035 50       		.byte	0x50
+ 1373 0036 D2000000 		.4byte	.LVL19
+ 1374 003a 28010000 		.4byte	.LVL31
+ 1375 003e 0100     		.2byte	0x1
+ 1376 0040 55       		.byte	0x55
+ 1377 0041 00000000 		.4byte	0
+ 1378 0045 00000000 		.4byte	0
+ 1379              	.LLST2:
+ 1380 0049 12000000 		.4byte	.LVL1
+ 1381 004d 1C000000 		.4byte	.LVL3
+ 1382 0051 0200     		.2byte	0x2
+ 1383 0053 30       		.byte	0x30
+ 1384 0054 9F       		.byte	0x9f
+ 1385 0055 B6000000 		.4byte	.LVL10
+ 1386 0059 B8000000 		.4byte	.LVL11
+ 1387 005d 0100     		.2byte	0x1
+ 1388 005f 50       		.byte	0x50
+ 1389 0060 B8000000 		.4byte	.LVL11
+ 1390 0064 BB000000 		.4byte	.LVL12-1
+ 1391 0068 0900     		.2byte	0x9
+ 1392 006a 91       		.byte	0x91
+ 1393 006b 5C       		.sleb128 -36
+ 1394 006c 06       		.byte	0x6
+ 1395 006d 33       		.byte	0x33
+ 1396 006e 24       		.byte	0x24
+ 1397 006f 73       		.byte	0x73
+ 1398 0070 00       		.sleb128 0
+ 1399 0071 22       		.byte	0x22
+ 1400 0072 9F       		.byte	0x9f
+ 1401 0073 BB000000 		.4byte	.LVL12-1
+ 1402 0077 C0000000 		.4byte	.LVL13
+ 1403 007b 1500     		.2byte	0x15
+ 1404 007d 91       		.byte	0x91
+ 1405 007e 54       		.sleb128 -44
+ 1406 007f 06       		.byte	0x6
+ 1407 0080 31       		.byte	0x31
+ 1408 0081 24       		.byte	0x24
+ 1409 0082 91       		.byte	0x91
+ 1410 0083 5C       		.sleb128 -36
+ 1411 0084 06       		.byte	0x6
+ 1412 0085 33       		.byte	0x33
+ 1413 0086 24       		.byte	0x24
+ 1414 0087 22       		.byte	0x22
+ 1415 0088 91       		.byte	0x91
+ 1416 0089 58       		.sleb128 -40
+ 1417 008a 06       		.byte	0x6
+ 1418 008b 32       		.byte	0x32
+ 1419 008c 24       		.byte	0x24
+ 1420 008d 22       		.byte	0x22
+ 1421 008e 75       		.byte	0x75
+ 1422 008f 00       		.sleb128 0
+ 1423 0090 22       		.byte	0x22
+ 1424 0091 9F       		.byte	0x9f
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 28
+
+
+ 1425 0092 C0000000 		.4byte	.LVL13
+ 1426 0096 C2000000 		.4byte	.LVL14
+ 1427 009a 1600     		.2byte	0x16
+ 1428 009c 91       		.byte	0x91
+ 1429 009d 54       		.sleb128 -44
+ 1430 009e 06       		.byte	0x6
+ 1431 009f 31       		.byte	0x31
+ 1432 00a0 24       		.byte	0x24
+ 1433 00a1 91       		.byte	0x91
+ 1434 00a2 5C       		.sleb128 -36
+ 1435 00a3 06       		.byte	0x6
+ 1436 00a4 33       		.byte	0x33
+ 1437 00a5 24       		.byte	0x24
+ 1438 00a6 22       		.byte	0x22
+ 1439 00a7 91       		.byte	0x91
+ 1440 00a8 58       		.sleb128 -40
+ 1441 00a9 06       		.byte	0x6
+ 1442 00aa 32       		.byte	0x32
+ 1443 00ab 24       		.byte	0x24
+ 1444 00ac 22       		.byte	0x22
+ 1445 00ad 7D       		.byte	0x7d
+ 1446 00ae 00       		.sleb128 0
+ 1447 00af 06       		.byte	0x6
+ 1448 00b0 22       		.byte	0x22
+ 1449 00b1 9F       		.byte	0x9f
+ 1450 00b2 00000000 		.4byte	0
+ 1451 00b6 00000000 		.4byte	0
+ 1452              		.section	.debug_aranges,"",%progbits
+ 1453 0000 1C000000 		.4byte	0x1c
+ 1454 0004 0200     		.2byte	0x2
+ 1455 0006 00000000 		.4byte	.Ldebug_info0
+ 1456 000a 04       		.byte	0x4
+ 1457 000b 00       		.byte	0
+ 1458 000c 0000     		.2byte	0
+ 1459 000e 0000     		.2byte	0
+ 1460 0010 00000000 		.4byte	.LFB63
+ 1461 0014 30020000 		.4byte	.LFE63-.LFB63
+ 1462 0018 00000000 		.4byte	0
+ 1463 001c 00000000 		.4byte	0
+ 1464              		.section	.debug_ranges,"",%progbits
+ 1465              	.Ldebug_ranges0:
+ 1466 0000 00000000 		.4byte	.LFB63
+ 1467 0004 30020000 		.4byte	.LFE63
+ 1468 0008 00000000 		.4byte	0
+ 1469 000c 00000000 		.4byte	0
+ 1470              		.section	.debug_line,"",%progbits
+ 1471              	.Ldebug_line0:
+ 1472 0000 3E020000 		.section	.debug_str,"MS",%progbits,1
+ 1472      0200D301 
+ 1472      00000201 
+ 1472      FB0E0D00 
+ 1472      01010101 
+ 1473              	.LASF6:
+ 1474 0000 6C6F6E67 		.ascii	"long long int\000"
+ 1474      206C6F6E 
+ 1474      6720696E 
+ 1474      7400
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 29
+
+
+ 1475              	.LASF26:
+ 1476 000e 4C43445F 		.ascii	"LCD_WriteControl\000"
+ 1476      57726974 
+ 1476      65436F6E 
+ 1476      74726F6C 
+ 1476      00
+ 1477              	.LASF21:
+ 1478 001f 4C43445F 		.ascii	"LCD_Start\000"
+ 1478      53746172 
+ 1478      7400
+ 1479              	.LASF9:
+ 1480 0029 5F5F696E 		.ascii	"__int32_t\000"
+ 1480      7433325F 
+ 1480      7400
+ 1481              	.LASF31:
+ 1482 0033 556C7469 		.ascii	"Ultimo_Paso_Read\000"
+ 1482      6D6F5F50 
+ 1482      61736F5F 
+ 1482      52656164 
+ 1482      00
+ 1483              	.LASF12:
+ 1484 0044 666C6F61 		.ascii	"float\000"
+ 1484      7400
+ 1485              	.LASF24:
+ 1486 004a 52656C6F 		.ascii	"Reloj_controlado_Write\000"
+ 1486      6A5F636F 
+ 1486      6E74726F 
+ 1486      6C61646F 
+ 1486      5F577269 
+ 1487              	.LASF0:
+ 1488 0061 7369676E 		.ascii	"signed char\000"
+ 1488      65642063 
+ 1488      68617200 
+ 1489              	.LASF1:
+ 1490 006d 756E7369 		.ascii	"unsigned char\000"
+ 1490      676E6564 
+ 1490      20636861 
+ 1490      7200
+ 1491              	.LASF33:
+ 1492 007b 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1492      43313120 
+ 1492      352E342E 
+ 1492      31203230 
+ 1492      31363036 
+ 1493 00ae 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1493      20726576 
+ 1493      6973696F 
+ 1493      6E203233 
+ 1493      37373135 
+ 1494 00e1 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1494      66756E63 
+ 1494      74696F6E 
+ 1494      2D736563 
+ 1494      74696F6E 
+ 1495              	.LASF19:
+ 1496 0109 75657374 		.ascii	"uestado\000"
+ 1496      61646F00 
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 30
+
+
+ 1497              	.LASF5:
+ 1498 0111 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1498      20756E73 
+ 1498      69676E65 
+ 1498      6420696E 
+ 1498      7400
+ 1499              	.LASF3:
+ 1500 0123 73686F72 		.ascii	"short unsigned int\000"
+ 1500      7420756E 
+ 1500      7369676E 
+ 1500      65642069 
+ 1500      6E7400
+ 1501              	.LASF37:
+ 1502 0136 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1502      52784275 
+ 1502      66666572 
+ 1502      00
+ 1503              	.LASF13:
+ 1504 0143 646F7562 		.ascii	"double\000"
+ 1504      6C6500
+ 1505              	.LASF36:
+ 1506 014a 6D61696E 		.ascii	"main\000"
+ 1506      00
+ 1507              	.LASF35:
+ 1508 014f 433A5C55 		.ascii	"C:\\Users\\eleni\\Desktop\\DSE\\Practicas\\Practica"
+ 1508      73657273 
+ 1508      5C656C65 
+ 1508      6E695C44 
+ 1508      65736B74 
+ 1509 017c 735C5072 		.ascii	"s\\Practica2.5.cydsn\000"
+ 1509      61637469 
+ 1509      6361322E 
+ 1509      352E6379 
+ 1509      64736E00 
+ 1510              	.LASF28:
+ 1511 0190 4C43445F 		.ascii	"LCD_PrintString\000"
+ 1511      5072696E 
+ 1511      74537472 
+ 1511      696E6700 
+ 1512              	.LASF11:
+ 1513 01a0 75696E74 		.ascii	"uint16\000"
+ 1513      313600
+ 1514              	.LASF8:
+ 1515 01a7 756E7369 		.ascii	"unsigned int\000"
+ 1515      676E6564 
+ 1515      20696E74 
+ 1515      00
+ 1516              	.LASF7:
+ 1517 01b4 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1517      206C6F6E 
+ 1517      6720756E 
+ 1517      7369676E 
+ 1517      65642069 
+ 1518              	.LASF27:
+ 1519 01cb 4C43445F 		.ascii	"LCD_Position\000"
+ 1519      506F7369 
+ 1519      74696F6E 
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 31
+
+
+ 1519      00
+ 1520              	.LASF32:
+ 1521 01d8 4C43445F 		.ascii	"LCD_PrintU32Number\000"
+ 1521      5072696E 
+ 1521      74553332 
+ 1521      4E756D62 
+ 1521      657200
+ 1522              	.LASF23:
+ 1523 01eb 4D617263 		.ascii	"Marcar_Read\000"
+ 1523      61725F52 
+ 1523      65616400 
+ 1524              	.LASF22:
+ 1525 01f7 53696775 		.ascii	"Siguiente_Read\000"
+ 1525      69656E74 
+ 1525      655F5265 
+ 1525      616400
+ 1526              	.LASF10:
+ 1527 0206 696E7433 		.ascii	"int32_t\000"
+ 1527      325F7400 
+ 1528              	.LASF16:
+ 1529 020e 73697A65 		.ascii	"sizetype\000"
+ 1529      74797065 
+ 1529      00
+ 1530              	.LASF18:
+ 1531 0217 6572726F 		.ascii	"error\000"
+ 1531      7200
+ 1532              	.LASF30:
+ 1533 021d 5061736F 		.ascii	"Paso_actual_Read\000"
+ 1533      5F616374 
+ 1533      75616C5F 
+ 1533      52656164 
+ 1533      00
+ 1534              	.LASF34:
+ 1535 022e 6D61696E 		.ascii	"main.c\000"
+ 1535      2E6300
+ 1536              	.LASF14:
+ 1537 0235 63686172 		.ascii	"char\000"
+ 1537      00
+ 1538              	.LASF20:
+ 1539 023a 5061736F 		.ascii	"Paso_sig_Write\000"
+ 1539      5F736967 
+ 1539      5F577269 
+ 1539      746500
+ 1540              	.LASF2:
+ 1541 0249 73686F72 		.ascii	"short int\000"
+ 1541      7420696E 
+ 1541      7400
+ 1542              	.LASF4:
+ 1543 0253 6C6F6E67 		.ascii	"long int\000"
+ 1543      20696E74 
+ 1543      00
+ 1544              	.LASF15:
+ 1545 025c 6C6F6E67 		.ascii	"long double\000"
+ 1545      20646F75 
+ 1545      626C6500 
+ 1546              	.LASF25:
+ 1547 0268 5061736F 		.ascii	"Paso_erroneo_Read\000"
+ARM GAS  C:\Users\eleni\AppData\Local\Temp\ccbRGt9t.s 			page 32
+
+
+ 1547      5F657272 
+ 1547      6F6E656F 
+ 1547      5F526561 
+ 1547      6400
+ 1548              	.LASF17:
+ 1549 027a 65737461 		.ascii	"estado\000"
+ 1549      646F00
+ 1550              	.LASF29:
+ 1551 0281 43794465 		.ascii	"CyDelay\000"
+ 1551      6C617900 
+ 1552              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

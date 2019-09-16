@@ -1,0 +1,34 @@
+# Practica2.5
+# 2019-04-10 15:01:57Z
+
+# IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 0
+# IO_1@[IOP=(1)][IoId=(1)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 1
+# IO_3@[IOP=(1)][IoId=(3)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 3
+set_location "ClockBlock" clockblockcell -1 -1 0
+set_io "Marcar(0)" iocell 1 6
+set_io "Siguiente(0)" iocell 1 7
+set_io "\LCD:LCDPort(0)\" iocell 12 0
+set_io "\LCD:LCDPort(1)\" iocell 12 1
+set_io "\LCD:LCDPort(2)\" iocell 12 2
+set_io "\LCD:LCDPort(3)\" iocell 12 3
+set_io "\LCD:LCDPort(4)\" iocell 12 4
+set_io "\LCD:LCDPort(5)\" iocell 12 5
+set_io "\LCD:LCDPort(6)\" iocell 12 6
+set_location "Net_71" 1 3 0 1
+set_location "Net_73" 1 3 1 0
+set_location "Net_72" 1 3 0 2
+set_location "Net_70" 1 3 0 0
+set_location "Net_230" 0 3 0 1
+set_location "Net_231" 0 3 0 0
+set_location "\Paso_sig:Sync:ctrl_reg\" 1 3 6
+set_location "\Reloj_controlado:Sync:ctrl_reg\" 0 3 6
+set_location "\Paso_actual:sts:sts_reg\" 1 3 3
+set_location "\Ultimo_Paso:sts:sts_reg\" 1 4 3
+set_location "\Paso_erroneo:sts:sts_reg\" 0 3 3
+set_location "cydff_1" 1 3 0 3
+set_location "cydff_2" 1 3 1 1
+set_location "cydff_3" 1 3 1 2
+set_location "cydff_4" 1 3 1 3

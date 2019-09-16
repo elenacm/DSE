@@ -1,0 +1,12 @@
+C:\Users\robin\Universidad\Tercero\2o_Cuat\DSE\Practicas\Practicas\Practica3.cydsn\Practica3.cyprj|50b821c9-d278-45a1-8e13-98479a7886b7
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|6a2ed9b7-2378-4cdf-901b-c1d2a0f15c0a
+C:\Users\robin\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|9cbb1e9c-0691-47b4-bf1a-c87ae99fcbfd
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|3e635377-00b7-4d0d-861c-9baadd3899b0
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|9f2c59fb-2983-457d-8d06-b50d71b653fe
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|8991a0f6-68cf-45ad-b321-318c82196888
+C:\Users\robin\Universidad\Tercero\2o_Cuat\DSE\Practicas\Practicas\Practica2.5.cydsn\Practica2.5.cyprj|f51d0d07-83cc-4a38-9427-294539d58b66
+C:\Users\robin\Universidad\Tercero\2o_Cuat\DSE\Practicas\Practicas\Practica2.4.cydsn\Practica2.4.cyprj|2a4791fd-6eb7-4e55-9a32-7c5718f90026
+C:\Users\robin\Universidad\Tercero\2o_Cuat\DSE\Practicas\Practicas\Practica2.3.cydsn\Practica2.3.cyprj|d71557e3-ba4f-423e-8c5a-7b4077cfb9ba
+C:\Users\robin\Universidad\Tercero\2o_Cuat\DSE\Practicas\Practicas\Practica2.cydsn\Practica2.cyprj|7989ed06-d7ab-4600-99c1-a61943f9cc0c
+C:\Users\robin\Universidad\Tercero\2o_Cuat\DSE\Practicas\Practicas\Practica1.cydsn\Practica1.cyprj|5fa4f588-07f7-4ed7-9980-6a97568391d5
+C:\Users\robin\Universidad\Tercero\2o_Cuat\DSE\Practicas\Practicas\Practica4.2.cydsn\Practica4.2.cyprj|8ca7bea1-ff18-41f7-b622-755be2bbf5a9
